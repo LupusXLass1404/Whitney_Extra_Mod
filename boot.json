@@ -1,10 +1,10 @@
 {
-  "name": "Whitney_Additions_Mod",
+  "name": "Whitney_Extra_Mod",
   "version": "0.0.1",
   "styleFileList": [],
   "scriptFileList": [],
   "tweeFileList": [
-    "game/whitney_additions_mod_lake.twee"
+    "game/whitney_extra_mod_lake.twee"
   ],
   "imgFileList": [],
   "additionFile": [
@@ -19,7 +19,7 @@
         {
           "passage": "Lake Shore",
           "findString": "<<if Time.hour gte 18 and $halloween is 1 and Time.monthDay is 31 and $halloween_lake is 1>>",
-          "replace": "\t\t你看到有個人影撐著傘站在湖邊，是惠特尼。你看到那附近有一群鴨子。\n\t\t<br/>\n\t\t<<ind>><<link [[靠近|Whitney Additions Mod Lake]]>><</link>>\n\t\t<br/><br/>\n\n\t\t<<if Time.hour gte 18 and $halloween is 1 and Time.monthDay is 31 and $halloween_lake is 1>>"
+          "replace": "\t\t你看到有個人影撐著傘站在湖邊，是惠特尼。你看到那附近有一群鴨子。\n\t\t<br/>\n\t\t<<ind>><<link [[靠近|Whitney Extra Mod Lake]]>><</link>>\n\t\t<br/><br/>\n\n\t\t<<if Time.hour gte 18 and $halloween is 1 and Time.monthDay is 31 and $halloween_lake is 1>>"
         }
       ]
     }
