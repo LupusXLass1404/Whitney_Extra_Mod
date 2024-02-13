@@ -7,7 +7,6 @@
   ],
   "tweeFileList": [
     "game/whitney_extra_mod_lake.twee",
-    "game/whitney_extra_mod_widgets.twee"
   ],
   "imgFileList": [],
   "additionFile": [
@@ -22,7 +21,7 @@
         "js": [
           {
             "from": "text: V.whitney_text,",
-            "to": "text: V.whitney_text,\n\t\t\t\twhitExtMod_lake: V.whitextmod_lake,\n\t\t\t\twhitExtMod_duck: V.whitextmod_duck,",
+            "to": "text: V.whitney_text,\n\t\t\t\twhitExtMod_lake: V.whitextmod_lake,\n\t\t\t\twhitExtMod_duck: V.whitextmod_duck,\n\n\t\twhitExtMod_clothes: V.whitextmod_clothes,",
             "fileName": "ingame.js"
           }
         ]

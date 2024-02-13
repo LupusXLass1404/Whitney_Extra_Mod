@@ -1,0 +1,184 @@
+/* 場景建構 */
+<<set $outside to 1>><<set $location to "lake">><<effects>><<lakeeffects>>
+
+	/* 室內outside=0; 室外outside=1 */
+<<set $outside to 1>>
+	/* 地點 */
+<<set $location to "town">>
+	/* 提示（換行） */
+<<effects>><<lakeeffects>>
+	/* 經過時間 */
+<<pass 15>>
+
+/* 人稱 */
+<<npc Whitney>><<person1>>
+<<He>>
+<<his>>
+
+/* 數值 */
+	/* 露出癖 */
+	/* link用exhibitionist、if用exhibitionism、事件中用exhibitionism */
+<<exhibitionist1>>
+<<exhibitionist2>>
+<<exhibitionist3>>
+<<elseif $exhibitionism gte 55>><<exhibitionist4>><</if>>
+<<elseif $exhibitionism gte 75>><<exhibitionist5>><</if>>
+
+<<exhibitionism1>>
+	/* 淫亂 */
+	/* link用promiscuous、if用promiscuity、事件中用promiscuity */
+<<if $promiscuity gte 55>><<promiscuous4>><</if>>
+<<promiscuous1>>
+	
+<<promiscuity1>>
+
+	/* 疼痛 */
+<<pain 2>><<gpain>>
+<<pain 4>><<gpain>>
+<<pain 8>><<ggpain>>
+
+<<pain -2>><<lpain>>
+<<pain -4>><<lpain>>
+<<pain -8>><<llpain>>
+
+<<violence 6>><<gpain>>
+
+	/* 性奮 */
+<<arousal 600>><<garousal>>
+<<arousal 400 "mouth">><<garousal>>
+<<arousal 1000 "genitals">><<ggarousal>>
+<<arousal 5000 "genitals">><<gggarousal>>
+
+	/* 壓力 */
+<<stress 6>><<gstress>>
+<<stress 12>><<ggstress>>
+<<stress 18>><<gggstress>>
+
+	/* 創傷 */
+<<trauma 6>><<gtrauma>>
+<<trauma 12>><<ggtrauma>>
+
+<<trauma -6>><<ltrauma>>
+
+<<npcincr Whitney dom 1>><<gdom>>
+<<npcincr Whitney dom 3>><<ggdom>>
+
+<<npcincr Whitney dom -1>><<ldom>>
+<<npcincr Whitney dom -3>><<lldom>>
+
+<<npcincr Whitney love 1>><<glove>>
+<<npcincr Whitney love 2>><<gglove>>
+<<npcincr Whitney love 3>><<gglove "Whitney">>
+<<npcincr Whitney love 5>><<gglove>>
+
+<<npcincr Whitney love -1>><<llove>>
+<<npcincr Whitney love -3>><<lllove>>
+
+	/* 性欲+5用+；+10用++；+15用+++ */
+<<npcincr Whitney lust 5>><<glust>>
+<<npcincr Whitney lust 10>><<gglust>>
+
+	/* 性欲-20*/
+<<npcincr Whitney lust -20>><<llust>>
+
+/* 技能 */
+	/* link */
+<<dancedifficulty 1 1000>>
+	/* 判定 */
+	<<if $danceSuccess>>
+
+	<<else>>
+		
+	<</if>>
+
+
+/* 態度 */
+	<<if $speech_attitude is "meek">>
+		
+	<<elseif $speech_attitude is "bratty">>
+		
+	<<else>>
+		
+	<</if>>
+/* 戀人與非戀 */
+	<<if $whitneyromance is 1>>
+		
+	<<else>>
+		
+	<</if>>
+
+/* 支配 */	
+	<<if C.npc.Whitney.dom gte 16>>
+		
+	<<elseif C.npc.Whitney.dom gte 8>>
+		
+	<<else>>
+		
+	<</if>>
+
+/* 好感 */	
+	<<if C.npc.Whitney.love gte 27>>
+		
+	<<else>>
+		
+	<</if>>
+
+/* 顏色 */
+<span class="red"></span>
+
+/* link分支 */
+<<set $phase to 0>>
+<<set $phase to 1>>
+<<set $phase to 2>>
+<<set $phase to 3>>
+
+<<if $phase is 0>>
+<<elseif $phase is 1>>
+<<elseif $phase is 2>>
+<<elseif $phase is 3>>
+<<else>>
+<</if>>
+
+<<switch $phase>>
+	<<case 0>>
+
+	<<case 1>>
+
+	<<case 2>>
+
+	<<case 3>>
+	
+	<<default>>
+
+<</switch>>
+
+
+/* 裸露 0=沒裸、1=裸露但有穿衣服、2=全裸*/		
+<<if $exposed gte 1>>
+
+
+/* 懷孕 */
+<<print playerBellyVisible() ? "吹起一个泡泡，泡泡啪的一声破了" : "吸了一口烟">>
+<<if playerBellyVisible()>>鼻子<<else>>腹部<</if>>
+
+/* 濕身 */
+<<water>>
+<<dry>>
+
+/* 童貞 */
+<<takeHandholdingVirginity "Whitney" "romantic">>
+<<takeKissVirginity "Whitney" "loveInterest">>
+<<takeKissVirginity "Whitney" `($whitneyromance is 1?"loveInterest":"romantic")`>>
+
+/* 換NPC衣服 */
+<<npcClothesName $NPCName[$NPCNameList.indexOf("Whitney")] "Whitney">>
+<<set $NPCList[0].clothes to clone($NPCName[$NPCNameList.indexOf("Whitney")].clothes)>>
+
+/* 給衣服 */
+<<pirate_clothes_up>>
+<<upperwear 40>> /* 皮夾克 */
+<<lowerwear 22>> /* 破牛仔褲 */
+
+/* 脫衣服 */
+<<upperstrip>> /* 暫時脫上衣 */
+<<upperruined>> /* 毀損上衣。雖然會讓自動重購的人多買件衣服，但博物館展示也是這樣的XD */
