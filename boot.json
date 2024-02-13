@@ -2,15 +2,32 @@
   "name": "Whitney_Extra_Mod",
   "version": "0.0.1",
   "styleFileList": [],
-  "scriptFileList": [],
+  "scriptFileList": [
+    "game/03-JavaScript/whitney_extra_mod_fn.js"
+  ],
   "tweeFileList": [
-    "game/whitney_extra_mod_lake.twee"
+    "game/whitney_extra_mod_lake.twee",
+    "game/whitney_extra_mod_widgets.twee"
   ],
   "imgFileList": [],
   "additionFile": [
     "README.md"
   ],
   "addonPlugin": [
+    {
+      "modName": "ReplacePatcher",
+      "addonName": "ReplacePatcherAddon",
+      "modVersion": "1.0.0",
+      "params": {
+        "js": [
+          {
+            "from": "text: V.whitney_text,",
+            "to": "text: V.whitney_text,\n\t\t\t\twhitExtMod_lake: V.whitextmod_lake,\n\t\t\t\twhitExtMod_duck: V.whitextmod_duck,",
+            "fileName": "ingame.js"
+          }
+        ]
+      }
+    },
     {
       "modName": "TweeReplacer",
       "addonName": "TweeReplacerAddon",
@@ -19,7 +36,7 @@
         {
           "passage": "Lake Shore",
           "findString": "<<if Time.hour gte 18 and $halloween is 1 and Time.monthDay is 31 and $halloween_lake is 1>>",
-          "replace": "\t\t你看到有個人影撐著傘站在湖邊，是惠特尼。你看到那附近有一群鴨子。\n\t\t<br/>\n\t\t<<ind>><<link [[靠近|Whitney Extra Mod Lake]]>><</link>>\n\t\t<br/><br/>\n\n\t\t<<if Time.hour gte 18 and $halloween is 1 and Time.monthDay is 31 and $halloween_lake is 1>>"
+          "replace": "<<whitExtMod_lake>>\n\n\t\t<<if Time.hour gte 18 and $halloween is 1 and Time.monthDay is 31 and $halloween_lake is 1>>"
         }
       ]
     }
@@ -27,7 +44,11 @@
   "dependenceInfo": [
     {
       "modName": "TweeReplacer",
-      "version": "1.0.0"
+      "version": "^1.0.0"
+    },
+    {
+      "modName": "ReplacePatcher",
+      "version": "^1.0.0"
     }
   ]
 }

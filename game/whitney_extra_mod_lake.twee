@@ -1,4 +1,128 @@
+:: Whitney Extra Mod Lake Widgets [widget]
+/* 湖畔靠近 */
+<<widget "whitExtMod_lake">>
+	<<if whitExtMod_isInLakeDuck()>>
+		<<if $daily.whitney.whitExtMod_lake gte 1>>
+			你看到有個人影撐著傘站在湖邊，是惠特尼。
+			<br>
+			<<ind>><<link [[靠近|Whitney Extra Mod Lake Leave]]>><</link>>
+		<<else>>
+			你看到有個人影撐著傘站在湖邊，是惠特尼。你看到那附近有一群鴨子。
+			<br>
+			<<ind>><<link [[靠近|Whitney Extra Mod Lake]]>><</link>>
+		<</if>>
+
+		<br/><br/>
+	<</if>>
+<</widget>>
+
+/* 惠特尼離開 */
+<<widget "whitExtMod_lakeExit">>
+	<<set $daily.whitney.whitExtMod_lake to 0>>
+<</widget>>
+
+/* 選項 */
 :: Whitney Extra Mod Lake
-你看到惠特尼手上拿著麵包，他轉頭看了你一眼，又繼續將手上的麵包撕成小塊，朝湖裡丟去。
-<br/><br/>
+	<<set $outside to 1>><<set $location to "lake">><<effects>><<lakeeffects>>
+	
+	<<if $daily.whitney.whitExtMod_lake is undefined>>
+		你看到惠特尼手上拿著麵包，他轉頭看了你一眼，又繼續將手上的麵包撕成小塊，朝湖裡丟去。
+	<<else>>
+		他盯著湖面。
+	<</if>>
+	<br><br>
+
+	<<set $daily.whitney.whitExtMod_lake to 1>>
+
+	<<if $popcorn gte 1>>
+		<<foodicon "popcorn">><<link [[提供爆米花 (0:20)|Whitney Extra Mod Lake Popcorn]]>><<pass 20>><<set $popcorn -= 1>><<wearProp "popcorn">><</link>>
+		<br>
+	<</if>>
+	
+	<<if $daily.whitney.whitExtMod_duck is undefined>> /* 只能摸一次鴨子 */
+		<<ind>><<link [[靠近鴨子|Whitney Extra Mod Lake Duck]]>><<set $daily.whitney.whitExtMod_duck to 1>><</link>>
+		<br>
+	<</if>>
+
+	<<ind>><<link [[說你想餵鴨子|Whitney Extra Mod Lake Feed Duck]]>><</link>>
+	<br>
+	<<getouticon>><<link [[離開|Lake Shore]]>><</link>>
+
+/* 爆米花 */
+:: Whitney Extra Mod Lake Popcorn
+	<<set $outside to 1>><<set $location to "lake">><<effects>><<lakeeffects>>
+
+	<<link [[繼續|Whitney Extra Mod Lake]]>><</link>>
+
+/* 靠近鴨子 */
+:: Whitney Extra Mod Lake Duck
+	<<set $outside to 1>><<set $location to "lake">><<effects>><<lakeeffects>>
+
+	<<link [[繼續|Whitney Extra Mod Lake]]>><</link>>
+
+/* 餵鴨子 */
+:: Whitney Extra Mod Lake Feed Duck
+	<<set $outside to 1>><<set $location to "lake">><<effects>><<lakeeffects>>
+
+	<<link [[繼續|Whitney Extra Mod Lake]]>><</link>>
+
+/* 暴露 */
+:: Whitney Extra Mod Lake Exposed
+<<whitExtMod_lakeExit>>
+
 <<link [[繼續|Lake Shore]]>><</link>>
+
+
+/* 離開 */
+:: Whitney Extra Mod Lake Leave
+	<<set $outside to 1>><<set $location to "lake">><<effects>><<lakeeffects>>
+	<<whitExtMod_lakeExit>>
+
+	<<if $whitneyromance is 1>>
+		「我要走了。」但他沒有移動腳步，而是看著你。
+		<br><br>
+
+		<<link [[跟他一起離開森林|Whitney Extra Mod Lake Leave Forest]]>><</link>>
+		<br>
+		<<link [[留下|Whitney Extra Mod Lake Leave Refuse]]>><</link>>
+	<<else>>
+		他一言不發地離開了湖邊。
+	<</if>>
+
+:: Whitney Extra Mod Lake Leave Forest
+	<<effects>><<lakeeffects>>
+
+	<<if $speech_attitude is "meek">>
+		「我可以跟你一起走嗎？」你說道。
+	<<elseif $speech_attitude is "bratty">>
+		「我們一起走吧。」你說道。
+	<<else>>
+		「那走吧。」你說道。
+	<</if>>
+	<br><br>
+
+	惠特尼點了點頭，然後牽起你的手，拉著你走入了森林。他走了一條你也不知道的小路。他摟著你，時不時地環顧四周，確保沒有危險靠近。很快的，你們一起穿越了森林，抵達小鎮。<<if $exposed gte 1>>每當有人經過時，他都會用雨傘遮住你的身體，<</if>>他直到送你到了孤兒院的門口才放開你。
+	<br><br>
+	「不要誤會了，只是不能讓你在荒郊野外被什麼怪東西給啃了。」他從口袋裡掏出一支菸，抬頭看到你還站在門口，用一隻手把你推了進去，「快進去，別跟我說我還得陪你走到你那破房間。」
+	<br><br>
+	他轉身離開。你看到黑暗中閃出了火光，消失在小巷之中。
+
+	<<link [[繼續|Orphanage]]>><<endevent>><</link>>
+
+:: Whitney Extra Mod Lake Leave Refuse
+	<<set $outside to 1>><<set $location to "lake">><<effects>><<lakeeffects>>
+
+	<<if $speech_attitude is "meek">>
+		「我……現在還不能走，抱歉。」你說道。
+	<<elseif $speech_attitude is "bratty">>
+		「你走吧，我還沒有要回去。」你說道。
+	<<else>>
+		「我還不想回去。」你說道。
+	<</if>>
+	<br><br>
+
+	惠特尼皺著眉頭看著你，你以為他生氣了。但他突然他抱住了你，「注意安全。」他說道：「別受傷了，否則你就沒用了。」
+	<br><br>
+	他在你的額頭上留下了一吻後，轉身離開了湖邊。
+
+	<<link [[繼續|Lake Shore]]>><<endevent>><<set $eventskip to 1>><</link>>
