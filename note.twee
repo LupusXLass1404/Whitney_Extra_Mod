@@ -152,6 +152,76 @@
 
 <</switch>>
 
+/* 戰鬥 */
+	/* 打架 */
+	<<set $fightstart to 1>> 
+	<<if $fightstart is 1>> 
+		<<set $fightstart to 0>>
+	<</if>>
+
+	/* 騷擾 */
+	<<set $molestationstart to 1>>
+	<<if $molestationstart is 1>>
+		<<set $molestationstart to 0>>
+	<</if>>
+
+	/* 性愛 */
+	<<set $sexstart to 1>>
+	<<if $sexstart is 1>>
+		<<set $sexstart to 0>>
+	<</if>>
+
+	/* 放if裡面的 */
+	<<neutral 1>>
+	<<maninit>> /* NPC初始化 */
+		/* 合意 */
+		<<consensual>> /* 合意 */
+		<<set $consensual to 1>> /* 合意 */
+
+	/* 非自願 */
+	<<controlloss>> /* -自控 */
+	<<violence 1>> /* 被虐？非自願專用 */
+	<<neutral 1>> /* 通用 */
+	<<molested>> /* 騷擾 */
+
+	/* 戰鬥 */
+		<<set $enemytrust -= 100>> /* -信任 */
+		<<set $enemyanger += 200>> /* +憤怒 */
+		<<npcidlegenitals>> /* 戰鬥閒置生殖器 */
+
+	/* 通常這裡會放台詞 */
+	<<enable_rescue>> /* 救援 */
+
+
+	/* 放if外面的 */
+	<<effects>> /* 一般場景會用到的效果 */
+	<<effectsman>> /* 玩家的行動，比如十指緊扣 */
+	<<alarmstate>> /* 尖叫失敗提示 */
+	<<man>> /* NPC戰鬥行動顯示 */
+	<<audience>> /* 觀眾 */
+	<<stateman>> /* 他看起來很渴望。他看起來很興奮。他看起來很平靜。他看起來很謹慎。 */
+	<br><br>
+	<<actionsman>> /* 戰鬥選項 */
+
+	/* 戰鬥結尾 */
+	<<if _combatend>>
+		<span id="next"><<link [[继续|School Infirmary Whitney Oral Finish]]>><</link>></span><<nexttext>>
+	<<else>>
+		<span id="next"><<link [[继续|School Infirmary Whitney Oral]]>><</link>></span><<nexttext>>
+	<</if>>
+
+/* 戰鬥判定 */
+<<if $enemyhealth lte 0>> /* 敵人血量歸零 */
+<<elseif $enemyarousal gte $enemyarousalmax>> /* 敵人高潮 */
+<<elseif $alarm is 1 and $rescue is 1>> /* 救援 */
+<<else>>  /* 通常，自願戰鬥：要求停下來；戰鬥：失去戰鬥能力 */
+
+<</if>>
+	
+	/* 結束戰鬥後 */
+	<<clotheson>> /* 整理衣服 */
+	<<endcombat>> /* 戰鬥結束 */
+
 
 /* 裸露 0=沒裸、1=裸露但有穿衣服、2=全裸*/		
 <<if $exposed gte 1>>
