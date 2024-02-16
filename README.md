@@ -1,4 +1,4 @@
-## 惠特尼附加模組 Whitney Extra Mod
+## Whitney Extra Mod
 - 此Mod需要用ModLoader加載。
 - 二創皆有OOC，小心食用。
 - 模組非遊戲本體，如果要分享模組相關的截圖／內容，請務必補充說明是模組內容而非原版內容，避免造成不必要的誤會。
