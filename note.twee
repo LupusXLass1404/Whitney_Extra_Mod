@@ -10,10 +10,42 @@
 	/* 經過時間 */
 <<pass 15>>
 
-/* 人稱 */
+/* 代名詞 */ /*  */
 <<npc Whitney>><<person1>>
+<<nnpc_He "Whitney">> /* 惠特尼的he */
 <<He>>
 <<his>>
+<<girl>> /* 女孩、男孩 */
+<<bitch>> /* 婊子 */
+<<bastard>> /* 雜種、妓女 */
+<<breasts>> /* PC的胸 */
+<<genitals>> /* PC的生殖器 */
+<<bottom>> /* PC的屁股 */
+<<print $NPCList[0].penisdesc>> /* NPC的陰莖 */
+<<print $NPCList[0].breastsdesc>> /* NPC的胸部 */
+<<penis>> /* PC肉棒（有嬌嫩） */
+<<testicles>> /* 蛋蛋、囊袋、睪丸、陰囊 */
+<<prostate>> /* 前列腺、子宮 */
+<<pussy>> /* PC的小穴、淫穴（有嬌嫩） */
+<<clit>> /* PC的陰蒂（有嬌嫩） */
+<<strokes>> /* 揉搓、玩弄 */
+
+<<lewdness>> /* 粉字+敏感部位描寫：裸露的宏伟的胸部和娇嫩的阴茎 */
+
+<<tearful>> /* 你为自己内心的淫荡暖意而感到自责，通常戰鬥完都會有 */
+<<print $worn.lower.name>> /* PC的褲子 */
+<<print $worn.genitals.name>> /* PC的貞操帶 */
+<<print $worn.genitals.cn_name_cap>>
+<<npcClothesText $NPCList[0] "upper">>/* NPC的上衣 */
+<<npcClothesText $NPCList[0] "lower">>/* NPC的褲子 */
+
+/* PC性技能判定文字 */
+<<handtext>> /* 手部 */
+<<peniletext>> /* 陰莖 */
+<<vaginaltext>> /* 陰道 */
+
+/* PC高潮 */
+<<orgasm>>
 
 /* 數值 */
 	/* 露出癖 */
@@ -25,12 +57,21 @@
 <<elseif $exhibitionism gte 75>><<exhibitionist5>><</if>>
 
 <<exhibitionism1>>
+<<exhibitionism5>>
 	/* 淫亂 */
 	/* link用promiscuous、if用promiscuity、事件中用promiscuity */
-<<if $promiscuity gte 55>><<promiscuous4>><</if>>
+<<if $promiscuity gte 55>>
+	<<link [[|]]>><</link>><<promiscuous4>>
+<</if>>
 <<promiscuous1>>
 	
+<<promiscuity2>>
 <<promiscuity1>>
+<<if $promiscuity gte 15>>
+	<<link [[|]]>><</link>><<promiscuous2>>
+
+<</if>>
+	
 
 	/* 疼痛 */
 <<pain 2>><<gpain>>
@@ -48,17 +89,21 @@
 <<arousal 400 "mouth">><<garousal>>
 <<arousal 1000 "genitals">><<ggarousal>>
 <<arousal 5000 "genitals">><<gggarousal>>
+<<arousal 150 "bottom">>
 
 	/* 壓力 */
 <<stress 6>><<gstress>>
 <<stress 12>><<ggstress>>
 <<stress 18>><<gggstress>>
 
+<<stress -6>><<lstress>>
 	/* 創傷 */
 <<trauma 6>><<gtrauma>>
 <<trauma 12>><<ggtrauma>>
 
 <<trauma -6>><<ltrauma>>
+	/* 聲望 */
+	<<status 5>><<gcool>>
 
 <<npcincr Whitney dom 1>><<gdom>>
 <<npcincr Whitney dom 3>><<ggdom>>
@@ -66,6 +111,7 @@
 <<npcincr Whitney dom -1>><<ldom>>
 <<npcincr Whitney dom -3>><<lldom>>
 
+/* 惠特尼好感 */
 <<npcincr Whitney love 1>><<glove>>
 <<npcincr Whitney love 2>><<gglove>>
 <<npcincr Whitney love 3>><<gglove "Whitney">>
@@ -81,8 +127,16 @@
 	/* 性欲-20*/
 <<npcincr Whitney lust -20>><<llust>>
 
-/* 技能 */
-	/* link */
+/* 常用組合 */
+<<npcincr Whitney love -1>><<npcincr Whitney dom -1>><<llove>><<ldom>>
+
+
+/* 醉酒 */
+<<galcohol>>
+tending
+/* 技能*/
+	/* link、放在連結外面 */
+
 <<dancedifficulty 1 1000>>
 	/* 判定 */
 	<<if $danceSuccess>>
@@ -90,7 +144,20 @@
 	<<else>>
 		
 	<</if>>
-
+	/* 護理 */
+<<tendingdifficulty 1 1000>>
+<<if $tendingSuccess>>
+<<else>>	
+<</if>>
+/* 體能 */
+<<if currentSkillValue('physique') gte random(4000,16000)>>
+<<else>>	
+<</if>>
+	/* 性技巧 */
+<<if ($player.penisExist and currentSkillValue("penileskill") gte random(200, 600)) or ($player.vaginaExist and currentSkillValue("vaginalskill") gte random(200, 600))>>
+<</if>>
+	/* 手部 */
+	currentSkillValue("handskill")
 
 /* 態度 */
 	<<if $speech_attitude is "meek">>
@@ -101,11 +168,15 @@
 		
 	<</if>>
 /* 戀人與非戀 */
+/* $whitneyromance is 1 and */
+/* $whitneyromance isnot 1 and */
 	<<if $whitneyromance is 1>>
 		
 	<<else>>
 		
 	<</if>>
+
+	<<if $whitneyromance is 1>><<else>><</if>>
 
 /* 支配 */	
 	<<if C.npc.Whitney.dom gte 16>>
@@ -115,7 +186,14 @@
 	<<else>>
 		
 	<</if>>
-
+/* 性慾 */	
+	<<if C.npc.Whitney.lust gte 40>>
+		
+	<<elseif C.npc.Whitney.lust gte 20>>
+		
+	<<else>>
+		
+	<</if>>
 /* 好感 */	
 	<<if C.npc.Whitney.love gte 27>>
 		
@@ -123,8 +201,64 @@
 		
 	<</if>>
 
+<<if C.npc.Whitney.love gte 27>><</if>>
+
+/* PC男女、性別 */
+<<if $player.penisExist>>
+	<<if $player.vaginaExist>><</if>>
+	
+<<else>>
+	
+<</if>>
+/* 惠特尼男女、性別 */
+<<if $NPCList[0].penis isnot "none">><<else>><</if>>
+<<if $NPCList[0].penis isnot "none">> /* 陰莖 */
+	
+<<else>> /* 陰道 */
+	
+<</if>>
+
+/* PC外表男女、性別 */
+<<if $player.gender_appearance is "m">> /* 外表為男 */
+<<else>>
+	
+<</if>>
+/* 隨機數判定roll */
+	<<switch random(1,2)>>
+		<<case 1>>
+		<<case 2>>
+	<</switch>>
+
+/* 高潮判定 */
+<<if $arousal gte $arousalmax>>
+<</if>>
+<<if $arousal lt $arousalmax>>
+
+/* 惠特尼的貞操籠 */
+<<if playerChastity()>>
+	<<if $worn.genitals.origin is "Whitney">>
+		当<<he>>摸到了你的<<print $worn.genitals.cn_name_cap>>时，<<he>>停了下来。"很高兴看戴着它。"
+		<br><br>
+	<<else>>
+		当<<he>>碰到你的<<print $worn.genitals.cn_name_cap>>时，<<he>>停了下来。一阵粗暴后，<<his>>满脸的困惑化成了一声暗笑。"你在搞我。"
+		<br><br>
+	<</if>>
+	<<link [[继续|Whitney Pub Chastity]]>><</link>>
+	<br>
+<<else>>
+/* 懷孕 */
+<<print playerBellyVisible() ? "吹起一个泡泡，泡泡啪的一声破了" : "吸了一口烟">>
+<<if playerBellyVisible()>>鼻子<<else>>腹部<</if>>
+<<if playerBellyVisible()>><<else>><</if>>
+<<print playerBellyVisible() ? "" : "">>
+
 /* 顏色 */
 <span class="red"></span>
+<span class="pink"></span>
+<span class="blue"></span>
+<span class="green"></span>
+<span class="lewd"></span>
+
 
 /* link分支 */
 <<set $phase to 0>>
@@ -132,23 +266,27 @@
 <<set $phase to 2>>
 <<set $phase to 3>>
 
-<<if $phase is 0>>
-<<elseif $phase is 1>>
-<<elseif $phase is 2>>
-<<elseif $phase is 3>>
-<<else>>
+<<if $phase is 0>> /*  */
+<<else>> /* $phase is 1 */
+<</if>>
+
+
+<<if $phase is 0>> /*  */
+<<elseif $phase is 1>> /*  */
+<<elseif $phase is 2>> /*  */
+<<else>> /* $phase is 3 */
 <</if>>
 
 <<switch $phase>>
-	<<case 0>>
+	<<case 0>> /*  */
 
-	<<case 1>>
+	<<case 1>> /*  */
 
-	<<case 2>>
+	<<case 2>> /*  */
 
-	<<case 3>>
+	<<case 3>> /*  */
 	
-	<<default>>
+	<<default>> /* $phase is */
 
 <</switch>>
 
@@ -174,6 +312,7 @@
 	/* 放if裡面的 */
 	<<neutral 1>>
 	<<maninit>> /* NPC初始化 */
+	<<npcexpose>> /* NPC裸體 */
 		/* 合意 */
 		<<consensual>> /* 合意 */
 		<<set $consensual to 1>> /* 合意 */
@@ -203,19 +342,31 @@
 	<br><br>
 	<<actionsman>> /* 戰鬥選項 */
 
-	/* 戰鬥結尾 */
+	/* 預設戰鬥動作 */
+	<<npcoral>>
+
+	/* 戰鬥結束判定 */
 	<<if _combatend>>
-		<span id="next"><<link [[继续|School Infirmary Whitney Oral Finish]]>><</link>></span><<nexttext>>
+		<span id="next"><<link [[继续|Whitney Extra Mod Finish]]>><</link>></span><<nexttext>>
 	<<else>>
-		<span id="next"><<link [[继续|School Infirmary Whitney Oral]]>><</link>></span><<nexttext>>
+		<span id="next"><<link [[继续|Whitney Extra Mod]]>><</link>></span><<nexttext>>
 	<</if>>
 
-/* 戰鬥判定 */
+/* 戰鬥結果判定 */
 <<if $enemyhealth lte 0>> /* 敵人血量歸零 */
 <<elseif $enemyarousal gte $enemyarousalmax>> /* 敵人高潮 */
-<<elseif $alarm is 1 and $rescue is 1>> /* 救援 */
-<<else>>  /* 通常，自願戰鬥：要求停下來；戰鬥：失去戰鬥能力 */
+	<<ejaculation>>
 
+	<<clotheson>>
+	<<endcombat>>
+<<elseif $alarm is 1 and $rescue is 1>> /* 救援 */
+	
+	<<clotheson>>
+	<<endcombat>>
+<<else>>  /* 通常，自願戰鬥：要求停下來；戰鬥：失去戰鬥能力 */
+	
+	<<clotheson>>
+	<<endcombat>>
 <</if>>
 	
 	/* 結束戰鬥後 */
@@ -225,14 +376,35 @@
 
 /* 裸露 0=沒裸、1=裸露但有穿衣服、2=全裸*/		
 <<if $exposed gte 1>>
+<</if>>
 
+/* 體液 */
+<<bodyliquid "face" "semen">> /* 臉上精液 */
+<<bodyliquid "face" "goo">> /* 臉上愛液 */
+<<bodyliquid "chest" "semen">> /* 胸上精液 */
+<<bodyliquid "chest" "goo">> /* 胸上愛液 */
 
-/* 懷孕 */
-<<print playerBellyVisible() ? "吹起一个泡泡，泡泡啪的一声破了" : "吸了一口烟">>
-<<if playerBellyVisible()>>鼻子<<else>>腹部<</if>>
+	<<cheatBodyliquidOnPart "neck" "脖子" "semen">>
+	<<cheatBodyliquidOnPart "rightarm" "右臂" "semen">>
+	<<cheatBodyliquidOnPart "leftarm" "左臂" "semen">>
+	<<cheatBodyliquidOnPart "thigh" "腿部" "semen">>
+	<<cheatBodyliquidOnPart "bottom" "臀部" "semen">>
+	<<cheatBodyliquidOnPart "tummy" "腹部" "semen">>
+	<<cheatBodyliquidOnPart "chest" "胸部" "semen">>
+	<<cheatBodyliquidOnPart "face" "面部" "semen">>
+	<<cheatBodyliquidOnPart "hair" "头发" "semen">>
+	<<cheatBodyliquidOnPart "feet" "足部" "semen">>
+	<<cheatBodyliquidOnPart "vaginaoutside" "阴唇" "semen">>
+	<<cheatBodyliquidOnPart "vagina" "阴道" "semen">>
+	<<cheatBodyliquidOnPart "penis" "阴茎" "semen">>
+	<<cheatBodyliquidOnPart "anus" "后庭" "semen">>
+	<<cheatBodyliquidOnPart "mouth" "口腔" "semen">>
+
+/* 吞精 */
+<<cumswallow "human">> /* 人類 */
 
 /* 濕身 */
-<<water>>
+<<water>> /* 會換一行 */
 <<dry>>
 
 /* 童貞 */
@@ -240,6 +412,10 @@
 <<takeKissVirginity "Whitney" "loveInterest">>
 <<takeKissVirginity "Whitney" `($whitneyromance is 1?"loveInterest":"romantic")`>>
 
+/* 衣服判定 */
+<<if $worn.upper.name is "naked">> /* 上衣沒穿 */
+$worn.under_upper.name is "naked"
+<</if>>
 /* 換NPC衣服 */
 <<npcClothesName $NPCName[$NPCNameList.indexOf("Whitney")] "Whitney">>
 <<set $NPCList[0].clothes to clone($NPCName[$NPCNameList.indexOf("Whitney")].clothes)>>
@@ -249,6 +425,50 @@
 <<upperwear 40>> /* 皮夾克 */
 <<lowerwear 22>> /* 破牛仔褲 */
 
+带子绑在你的后脑勺上。这是一个嘴套
+<<facewear 23>>
+<<if $worn.face.type.includes("gag")>>
+	<<He>>停下来，脱掉了你的$worn.face.cn_name_cap。
+	<<set $worn.face.type.push("broken")>>
+	<<faceruined>>
+<</if>>
+
 /* 脫衣服 */
 <<upperstrip>> /* 暫時脫上衣 */
 <<upperruined>> /* 毀損上衣。雖然會讓自動重購的人多買件衣服，但博物館展示也是這樣的XD */
+
+/* 手持物品 */
+<<wearProp "popcorn">>
+<<handheldon>> /* 取消 */
+
+/* 上衣濕度增加 */
+<<set $upperwet += 20>>
+
+/* 肛交 */
+$analdisable is "f" /* 肛交啟用 */
+$analdisable is "t" /* 肛交禁用 */
+
+/* 時間紀錄 */
+get dayState() {
+	const hour = this.hour;
+	return hour < 6 || hour >= 21 ? "night" : hour >= 18 ? "dusk" : hour >= 9 ? "day" : "dawn";
+} // 9點晚上
+
+/* 湖邊拿衣服 */
+<<if _temp_clothes_present is 1>>
+
+<</if>>
+<<storeon "lakeshore">>
+
+/* 湖邊餵鴨 */
+
+
+<<link [[繼續|Lake Shore]]>><<endevent>><<set $eventskip to 1>><</link>>
+
+<<link [[繼續|Whitney Extra Mod Lake Leave]]>><</link>>
+
+<<link [[繼續|Whitney Extra Mod Lake]]>><</link>>
+
+/* 繁簡轉換 */
+包覆 > 包复
+光溜溜 > 光熘熘

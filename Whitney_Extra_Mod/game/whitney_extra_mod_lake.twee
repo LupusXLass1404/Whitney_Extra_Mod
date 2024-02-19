@@ -3,261 +3,792 @@
 <<widget "whitExtMod_lake">>
 	<<if whitExtMod_isInLakeDuck()>>
 		<<if $daily.whitney.whitExtMod_lake gte 1>>
-			你看到有個人影撐著傘站在湖邊，是惠特尼。
-			<br>
-			<<ind>><<link [[靠近|Whitney Extra Mod Lake Leave]]>><</link>>
+			鸭子們已经离开了岸边。惠特尼踢着地上的小石头，石头落到水里溅起了水花。<span class="blue"><<nnpc_He "Whitney">>时不时地看向你。</span>
 		<<else>>
-			你看到有個人影撐著傘站在湖邊，是惠特尼。你看到那附近有一群鴨子。
-			<br>
-			<<ind>><<link [[靠近|Whitney Extra Mod Lake]]>><</link>>
+			你看到有个被烟雾环绕的人影站在湖边，是惠特尼。那附近有一群鸭子。	
 		<</if>>
+		<br>
+/* Tip <<nnpc_He "Whitney">>似乎不欢迎你，如果你更暴露一点或许<<nnpc_He "Whitney">>会感性趣 */
+		<<if $exhibitionism gte 75 or $exposed lte 1>>
+			<<if $daily.whitney.whitExtMod_lake gte 1>>
+				<<askicon>><<link [[靠近|Whitney Extra Mod Lake Leave]]>><</link>>
+			<<elseif $exposed is 2>>
+				<<whitExtMod_lakeduckicon>><<link [[靠近|Whitney Extra Mod Lake]]>><<set $phase to 0>><</link>><<exhibitionist5>>
+			<<else>>
+				<<whitExtMod_lakeduckicon>><<link [[靠近|Whitney Extra Mod Lake]]>><<set $phase to 1>><</link>>
+			<</if>>
+		<<else>>
+			<span class="blue">你现在光着身子，不敢靠近<<nnpc_He "Whitney">>。</span>
+		<</if>>	
 
 		<br/><br/>
 	<</if>>
 <</widget>>
 
-/* 惠特尼離開 */
+/* 惠特尼离开 */
 <<widget "whitExtMod_lakeExit">>
 	<<set $daily.whitney.whitExtMod_lake to 0>>
 <</widget>>
 
-/* 選項 */
+/* icon */
+<<widget "whitExtMod_lakeduckicon">>
+	<<icon "whitExtMod_lakeduck.png">>
+<</widget>>
+
+<<widget "whitExtMod_duckicon">>
+	<<icon "whitExtMod_duck.png">>
+<</widget>>
+
+<<widget "whitExtMod_toasticon">>
+	<<icon "whitExtMod_toast.png">>
+<</widget>>
+
+/* 选项 */
 :: Whitney Extra Mod Lake
 	<<set $outside to 1>><<set $location to "lake">><<effects>><<lakeeffects>>
 	<<npc Whitney>><<person1>>
+	/* 设置惠特尼的衣服为皮夹克 */
 	<<npcClothesName $NPCName[$NPCNameList.indexOf("Whitney")] "Whitney">>
 	<<set $NPCList[0].clothes to clone($NPCName[$NPCNameList.indexOf("Whitney")].clothes)>>
 
-	<<if $daily.whitney.whitExtMod_lake is undefined>>
-		你看到惠特尼手上拿著麵包，他轉頭看了你一眼，又繼續將手上的麵包撕成小塊，朝湖裡丟去。
-	<<else>>
-		他盯著湖面。
-	<</if>>
-	<br><br>
+	<<if $daily.whitney.whitExtMod_lake is undefined>> /* 第一次靠近 */
+		<<set $daily.whitney.whitExtMod_lake to 1>>
 
-	<<set $daily.whitney.whitExtMod_lake to 1>>
+		<<if $whitneyromance is 1 and C.npc.Whitney.love gte 27>>
+			你看到惠特尼手上拿着麵包，<<he>>将手上的麵包撕成小块，朝湖里丢去。鸭子们在水上激烈地争抢着麵包块。
+		<<else>>
+			你看到惠特尼匆忙地把什麽东西塞进了口袋里，<<he>>转头<<if $whitneyromance is 1>>看向你<<else>>瞪着你<</if>>。你看到鸭子们在争抢着漂在水上的麵包块，猜得出来<<he>>刚刚应该是在餵鸭子。
+		<</if>>
+		<br><br>
+
+		<<if $whitneyromance is 1>> 
+			<<if $phase is 0 and $exposed is 2>> /* 裸露 */
+				“没想到在森林里还能遇到这麽骚的骚货，”<<he>>笑着说，
+				<<if C.npc.Whitney.lust gte 50>>
+					<span class="green"><<he>>的眼神在你的身体上徘徊。</span>
+				<<elseif C.npc.Whitney.lust gte 20>>
+					<span class="blue">但视线并没有在你身上久留。</span>
+				<<else>>
+					<span class="pink">但<<he>>仅仅是瞥了一眼就转过头去了，似乎是想无视你。</span>
+				<</if>>
+				<<npcincr Whitney lust 5>><<glust>>
+
+				<br><br>
+				<<exhibitionism5>> /* 露出5 */
+			<<else>> /* 预设、$phase is 1 */
+				“你怎麽来了？”<<he>>问道，你感觉<<he>>似乎不是很想看到你。
+				<br><br>
+			<</if>>
+
+			<<print playerBellyVisible() ? "<<he>>瞥了一眼你隆起的肚子，将菸扔在了地上，踩熄，然后拿出了一根口香糖塞进嘴里。" : "<<he>>吸了一口菸。">>
+			<br><br>
+		<<else>>
+			<<he>>看起来很烦躁，<<print playerBellyVisible() ? "但是<<he>>在看到你的肚子之后，还是把菸扔在了地上，默默地拿出一根口香糖塞进嘴里。" : "<<he>>吸了一口菸。">>
+			<br><br>
+			<<if $phase is 0 and $exposed is 2>>
+				<<exhibitionism5>>
+			<</if>>/* 露出5 */
+		<</if>>	
+	<<else>>
+		<<he>>盯着湖面。
+		<br><br>
+	<</if>>
+	
+	<<if $daily.whitney.whitExtMod_exposed is undefined and $exposed is 2 and $promiscuity gte 15>>
+		<<brothelicon>><<link [[诱惑|Whitney Extra Mod Lake Exposed]]>><<npcincr Whitney lust 5>><<set $daily.whitney.whitExtMod_exposed to 1>><</link>><<promiscuous2>><<glust>>
+		<br>
+	<</if>>
 
 	<<if $popcorn gte 1>>
-		<<foodicon "popcorn">><<link [[提供爆米花 (0:20)|Whitney Extra Mod Lake Popcorn]]>><<pass 20>><<set $popcorn -= 1>><<wearProp "popcorn">><</link>>
+		<<foodicon "popcorn">><<link [[提供爆米花 (0:20)|Whitney Extra Mod Lake Popcorn]]>><<pass 20>><<set $popcorn -= 1>><<wearProp "popcorn">><<npcincr Whitney love 1>><</link>><<glove>>
 		<br>
 	<</if>>
 	
-	<<if $daily.whitney.whitExtMod_duck is undefined>> /* 只能摸一次鴨子 */
-		<<ind>><<link [[靠近鴨子|Whitney Extra Mod Lake Duck]]>><<set $daily.whitney.whitExtMod_duck to 1>><</link>>
+	<<if $daily.whitney.whitExtMod_duck is undefined>> /* 只能摸一次鸭子 */
+		<<whitExtMod_duckicon>><<link [[靠近鸭子|Whitney Extra Mod Lake Duck]]>><<set $daily.whitney.whitExtMod_duck to 1>><</link>><<tendingdifficulty 1 1000>>
 		<br>
 	<</if>>
 
-	<<ind>><<link [[說你想餵鴨子|Whitney Extra Mod Lake Feed Duck]]>><</link>>
-	<br>
-	<<getouticon>><<link [[離開|Lake Shore]]>><</link>>
+	<<if $daily.whitney.whitExtMod_feed is undefined>> /* 只能餵一次鸭子 */
+		<<whitExtMod_toasticon>><<link [[说你想餵鸭子|Whitney Extra Mod Lake Feed Duck]]>><<set $daily.whitney.whitExtMod_feed to 1>><</link>>
+		<br>
+	<</if>>
+	
+	<<if $whitneyromance is 1>> /* 恋人关係 */
+		<<getouticon>><<link [[离开|Lake Shore]]>><<endevent>><<set $eventskip to 1>><</link>>
+	<<else>> /* 非恋人关係 */
+		<<getouticon>><<link [[离开|Whitney Extra Mod Lake Leave]]>><<set $daily.whitney.whitExtMod_leaveDirectly to 1>><</link>>
+	<</if>>
+	
+
+/* 诱惑 */
+:: Whitney Extra Mod Lake Exposed
+	<<set $outside to 1>><<set $location to "lake">><<effects>><<lakeeffects>>
+
+	<<if $whitneyromance is 1>>  /* 恋人关係 */
+		<<if $speech_attitude is "meek">>
+			“我一个人有点孤单，你可以陪我吗？”
+		<<elseif $speech_attitude is "bratty">>
+			“你也穿太多了，让我来帮你一把。”
+		<<else>>
+			“难得在森林里，你要不要也把衣服脱了？”
+		<</if>>
+		你靠了过去，将身体贴到<<he>>身上，抓住了<<he>>的<<npcClothesText $NPCList[0] "upper">>，想脱掉<<he>>的衣服。<<npcincr Whitney love 1>><<glove>>
+		<br><br>
+		<<promiscuity2>>
+
+		<<if C.npc.Whitney.lust gte 40>> /* 高性欲 */
+			惠特尼笑了，伸出手爱抚着你的<<breasts>>，任由你将<<he>>的衣服脱光。
+			<br><br>
+
+			<<link [[继续|Whitney Extra Mod Lake Exposed Sex]]>><<set $sexstart to 1>><</link>>
+		<<elseif C.npc.Whitney.lust gte 20>> /* 中性欲 */
+			<<if (playerChastity() and $worn.genitals.origin isnot "Whitney") or ($worn.genitals.origin is "Whitney" and $analdisable isnot "f") >> /* PC戴贞操带／笼 且 不是惠特尼的，或 肛交禁用 */
+				<<he>>把你的手拍开，敲了敲你的<<print $worn.genitals.cn_name_cap>>，“荡妇，你的小垃圾都戴上嘴套了，还想搞什麽花样？”
+				<br><br>
+				“戴上嘴套了就当条好狗，滚开，不要来烦我。”<<he>>把你推开。
+				<br><br>
+
+				<<link [[继续|Whitney Extra Mod Lake]]>><</link>>
+			<<else>>/* 没戴贞操带 */
+				<<he>>抓住了你不安分的手，把你的手移到<<he>>的裤裆上，“荡妇，你知道该做什麽。”
+				<br><br>
+
+				你扯开了<<he>>的<<npcClothesText $NPCList[0] "lower">>，<span class="lewd"><<he>>没穿内裤</span>。
+				<<if $NPCList[0].penis isnot "none">> /* 阴茎 */
+					你用手指包覆住<<he>>的<<print $NPCList[0].penisdesc>>，你<<handtext>>撸动<<he>>的柱身，来回套弄着，另一隻手揉搓着<<he>>的阴囊。
+				<<else>> /* 阴道 */
+					你用拇指按压着<<he>>的阴蒂，手指深入了<<he>>的小穴，另一隻手<<handtext>>抚摸着<<he>>的<<print $NPCList[0].breastsdesc>>。
+				<</if>>
+				<br><br>
+
+				惠特尼因为你的动作发出了一声满足的喘息，
+				<<if playerChastity() and $analdisable is "f">>
+					“你很乖，我可以给你点奖励。”<<he>>敲了敲你的<<print $worn.genitals.cn_name_cap>>，然后把手放在你的屁股上。
+				<<else>>
+					<<he>>的手也伸向你的<<genitals>>。
+				<</if>>
+
+				<<if playerChastity() and $analdisable is "f">>
+					<<he>>一隻手揉捏着你的<<bottom>>，另一隻手的手指滑入你的体内，每当<<he>>按压你的前列腺时，都会让你颤抖。<<arousal 3000 "bottom">><<gggarousal>>
+				<<elseif $player.penisExist>>
+					<<he>>的手包覆住你的肉棒，<<he>>先是用拇指摩擦你的尖端，然后不停地上下滑动、撸动着<<if $player.vaginaExist>>，偶尔将手指插入你的<<pussy>><</if>>。<<arousal 3000 "genitals">><<gggarousal>>
+				<<else>>
+					<<he>>的手指滑入了你的小穴，同时用拇指摩擦着你的阴蒂。<<arousal 3000 "genitals">><<gggarousal>>
+				<</if>>
+				<br><br>
+
+				<<if currentSkillValue("handskill") gte random(200, 600) and $arousal lt $arousalmax>> /* 手部技巧判定成功 且 PC未高潮 */
+					惠特尼用另一隻手紧紧地环抱着你，<<he>>的头埋入了你的脖子，你能感觉到随着<<he>>的动作加快，温热的呼吸洒在你的皮肤上。身体贴的这麽近你很难动作，但你还是配合着<<he>>加快了速度。没过多久，<<he>>就开始颤抖起来，而你也被推向了高潮。
+					<br><br>
+					<<orgasm>>
+
+					<<if playerChastity() and $analdisable is "f">>
+						<<he>>抱着你喘着气，直到<<he>>的呼吸平稳下来。<<npcincr Whitney lust -20>><<llust>>
+						<br><br>
+						<<he>>用力拍了一下你的屁股，笑着说道：“只玩屁股就可以让你爽成这样，不愧是我的荡妇。”
+						<br><br>
+
+						<<link [[繼續|Whitney Extra Mod Lake]]>><</link>>
+					<<else>>
+						<<he>>抱着你喘着气，等到<<he>>的呼吸平稳下来后，吻了你一下，“不错，荡妇。”<<npcincr Whitney lust -20>><<llust>>
+						<br><br>
+						“我的手都被你弄髒了，”<<he>>笑着把手放到你的嘴边，“来，自己舔乾淨。”
+						<br><br>
+
+						<<link [[舔|Whitney Extra Mod Lake Exposed Lick]]>><<set $phase to 0>><<npcincr Whitney 	lust 5>><</link>><<glust>>
+						<br>
+						<<link [[拒绝|Whitney Extra Mod Lake Exposed Lick]]>><<set $phase to 1>><</link>>
+					<</if>>					
+				<<else>> /* 手部技巧判定失败 或 PC提前达到高潮 */
+					惠特尼感觉到你的顶峰即将来临，<<he>>加快了速度，将你推向了高潮。
+					<br><br>
+					<<orgasm>>
+
+					“该死，你这个废物动作真慢！”<<he>>谩骂着，然后用力压住了你的肩膀，强迫你跪下。
+					<br><br>
+
+					<<if $NPCList[0].penis isnot "none">> /* 阴茎 */
+						<<he>>的膝盖胯过你，抓着你的头发贴近<<he>>的肉棒，但<<he>>没有让你张嘴，而是用手握住了自己的阴茎，在你面前撸动起来。你还没从高潮的馀韵中恢復过来，只能茫然地看着<<he>>手指的动作逐渐加快。
+						<br><br>
+						突然<<he>>将肉棒贴到了你的脸上摩擦，达到了高潮，<<he>>蹭得你脸上到处都是<<he>>的精液。<<npcincr Whitney lust -20>><<llust>>
+
+						<<bodyliquid "face" "semen">>
+					<<else>> /* 阴道 */
+						<<he>>抓住你的后脑勺，把你拉到<<he>>的胯下，<<he>>的下体贴在了你的嘴上，用你的鼻子摩擦着<<he>>的阴蒂。你还没从高潮的馀韵中恢復过来，只能任由<<he>>在你的脸上磨擦着<<he>>的下体。
+						<br><br>
+						没过多久，<<he>>就达到了高潮，<<he>>呻吟的同时紧紧将你的脸按在<<he>>的小穴上，你被压得不能呼吸。<<he>>磨蹭着你的脸，用<<he>>的体液抹了你满脸。直到高潮结束，<<he>>才放开了你，你大口喘着气。<<npcincr Whitney lust -20>><<llust>>
+
+						<<bodyliquid "face" "goo">>
+					<</if>>
+					<br><br>
+
+					<<he>>长舒了口气，然后退了一步，欣赏着你的脸，“你这个样子好看多了。”<<he>>拿出手机，对着你，“荡妇，笑一个。”随后镜头的闪光灯亮起。<<stress 6>><<status 5>><<gstress>><<gcool>>
+					<br><br>
+					“行了，去洗洗脸吧。”<<he>>收起了手机，指了指湖泊，“或是继续当个骚货，”<<he>>大笑着，从口袋里掏出<<print playerBellyVisible() ? "一根口香糖" : "一支菸">>。
+					<br><br>
+					
+					<<link [[继续|Whitney Extra Mod Lake]]>><</link>>
+				<</if>>/* 手部技巧判定结尾 */
+			<</if>> /* 贞操带if结尾 */
+		<<else>> /* 低性欲 */
+			<<he>>突然用力地抱住了你，你连同双臂都被抱紧，无法做出任何动作，<<he>>将头埋入你的脖颈，当<<he>>湿润的舌头滑过你的皮肤时，你颤抖了一下。<<arousal 600>><<garousal>>
+			<br><br>
+			<<he>>突然用力咬了下去，你吃痛地叫出了声，在<<he>>怀里挣扎，你相信你的脖子上肯定留下了一个很明显的咬痕。<<pain 4>><<gpain>>
+			<br><br>
+			“小心点，荡妇。最好别让我发现你被其它东西咬了。”<<he>>把你推开，“下次吧，我现在没有心情。”
+			<br><br>
+			<<he>>盯着湖面，没有再理你。
+			<br><br>
+			
+			<<link [[继续|Whitney Extra Mod Lake]]>><</link>>
+		<</if>> /* 性欲if结尾 */
+	<<else>> /* 非恋人关係 */
+		你向<<he>>展示着身体，尝试吸引<<he>>的注意力，<<he>>看了你一眼。随后又将视线移回了湖泊。<<he>>只是一直<<print playerBellyVisible() ? "嚼着口香糖" : "抽着菸">>，对你的展示不感兴趣。正当你准备放弃时，<<he>><<print playerBellyVisible() ? "吹了一个泡泡，泡泡啪的一声破了" : "吐出了一团烟雾">>，<<he>>看起来很不耐烦地说：“你真是个烦人的<<bitch>>。”
+		<br><br>
+		<<he>>把<<print playerBellyVisible() ? "口香糖吐" : "抽完的烟蒂丢">>到地上，然后瞪着你，眼神中带有威胁。<<he>>警告：“不要跟过来。”
+		<br><br>
+		<<he>>转身离开湖边。
+		<br><br>
+
+		<<whitExtMod_lakeExit>>
+
+		<<link [[继续|Lake Shore]]>><<endevent>><<set $eventskip to 1>><</link>>
+	<</if>>/* 恋人关係if结尾 */
+
+:: Whitney Extra Mod Lake Exposed Lick
+	<<set $outside to 1>><<set $location to "lake">><<effects>><<lakeeffects>>
+
+	<<if $phase is 0>> /* 舔 */
+		你乖巧地伸出舌头舔着惠特尼的手指，直到把<<he>>手上的液体都舔乾淨了，才停下来。<<he>>的手指抚过你的嘴唇，很满意地说：“好<<girl>>。”
+		<br><br>
+
+		<<link [[继续|Whitney Extra Mod Lake]]>><</link>>
+	<<else>> /* 拒绝 */
+		你摇了摇头表示你不想舔。
+		<br><br>
+		“<<bitch>>还有不敢舔的东西啊？”<<he>>用嘲弄的语气说着，“行吧，我自己弄乾淨。”<<he>>在你的胸上抹了抹手。
+		<br><br>
+
+		<<link [[继续|Whitney Extra Mod Lake]]>><</link>>
+	<</if>>
+
+:: Whitney Extra Mod Lake Exposed Sex
+	<<if $sexstart is 1>>
+		<<set $sexstart to 0>>
+		<<consensual>>
+		<<set $consensual to 1>>
+		<<neutral 1>>
+		<<maninit>>
+		<<npcexpose>>
+	<</if>>
+
+	<<effects>>
+	<<effectsman>>
+	<<man>>
+	<<stateman>>
+	<br><br>
+	<<actionsman>>
+
+	<<if _combatend>>
+		<span id="next"><<link [[继续|Whitney Extra Mod Lake Exposed Sex Finish]]>><</link>></span><<nexttext>>
+	<<else>>
+		<span id="next"><<link [[继续|Whitney Extra Mod Lake Exposed Sex]]>><</link>></span><<nexttext>>
+	<</if>>
+
+:: Whitney Extra Mod Lake Exposed Sex Finish
+	<<set $outside to 1>><<set $location to "lake">><<effects>><<lakeeffects>>
+
+	<<if $enemyhealth lte 0>> /* 敌人血量归零 */
+		你把惠特尼推开。<<he>>瞪了你一眼，抓起<<he>>的衣服，转身离开了湖边。<<npcincr Whitney love -1>><<npcincr Whitney dom -1>><<llove>><<ldom>>
+		<br><br>
+		<<tearful>>你站了起来。
+		
+		<<whitExtMod_lakeExit>>
+
+		<<clotheson>>
+		<<endcombat>>
+
+		<<link [[继续|Lake Shore]]>><<endevent>><<set $eventskip to 1>><</link>>
+	<<elseif $enemyarousal gte $enemyarousalmax>> /* 敌人高潮 */
+		<<ejaculation>>
+		
+		惠特尼趴在你身上喘起着气，<<he>>温热的呼吸洒在你的皮肤上。<<npcincr Whitney lust -20>><<llust>>
+		<br><br>
+		<<he>>把你扶了起来，你看着<<he>>从衣服堆里掏出了<<print playerBellyVisible() ? "一根口香糖，塞进嘴里后" : "一支香菸，点燃后">>坐回你身边，<<he>>一隻手抱着你，你们靠在一起看着映满了星空的湖面。
+		<br><br>
+		你们就这样坐在湖边一段时间。突然，<<he>>把你的脑袋拉了过来，温柔地亲吻着你的嘴唇，<<he>>在你还没反应过来之前就把你推开了。等你回过神的时侯，<<he>>已经站起身，准备穿上自己的衣服。
+		<br><br>
+		<<tearful>>你也站了起来。
+
+		<<clotheson>>
+		<<endcombat>>
+		
+		<<link [[继续|Whitney Extra Mod Lake]]>><</link>>
+	<<else>> /* 要求停下来*/
+		“你真是个善变的<<bitch>>，”惠特尼嘟囔着。<<npcincr Whitney love -1>><<npcincr Whitney dom -1>><<llove>><<ldom>>
+		<br><br>
+		<<he>>把衣服穿好后，一言不发地离开了湖边。
+		<br><br>
+		<<tearful>>你站了起来。
+
+		<<whitExtMod_lakeExit>>
+
+		<<clotheson>>
+		<<endcombat>>
+
+		<<link [[继续|Lake Shore]]>><<endevent>><<set $eventskip to 1>><</link>>
+	<</if>>
 
 /* 爆米花 */
 :: Whitney Extra Mod Lake Popcorn
 	<<set $outside to 1>><<set $location to "lake">><<effects>><<lakeeffects>>
-		<<if $whitneyromance is 1>>
-			惠特尼看著你手裡的爆米花，他眼裡閃過了一絲驚訝，「你還真的是來餵鴨子的？」
+		<<if $whitneyromance is 1>> /* 恋人关係 */	
+			惠特尼看着你手里的爆米花，<<he>>眼里闪过了一丝惊讶，“你还真的是来餵鸭子的？”
 			<br><br>
-			你把爆米花拿給了他。
-
+			你把爆米花拿给了<<he>>。
 			<<if $speech_attitude is "meek">>
-				「我們可以一起餵鴨子。」你說道。
+				“我们可以一起餵鸭子，”你说道。
 			<<elseif $speech_attitude is "bratty">>
-				「一起餵吧？」你說道。
+				“当然了，你也一起，”你说道。
 			<<else>>
-				「當然了，你也一起。」你說道。
+				“一起餵吧？”你说道。
 			<</if>>
 			<br><br>
 			
-			<<if C.npc.Whitney.love gte 27>>
-				你們一起吃著爆米花，一邊將一些爆米花丟入水中，餵給鴨子吃。
-				<br><br>
-				過了不久，那些鴨子們吃飽了，紛紛遊離了岸邊。
-				<br><br>
-
+			<<if $whitneyromance is 1 and C.npc.Whitney.love gte 27>> /* 高好感 */
+				你们一起吃着爆米花，一边将一些爆米花丢入水中，餵给鸭子吃。过了不久，那些鸭子们吃饱了，纷纷游离了岸边。	
 				<<if C.npc.Whitney.dom gte 5>>
-					你看著鴨子們遊遠。突然惠特尼拍了一下你的肩膀。
+					你看着鸭子们游远，突然惠特尼拍了一下你的肩膀。
 					<br><br>
-					你轉頭過去看著他，他手上拿著一顆爆米花，往上丟，然後在爆米花落下時張嘴接住。接著又拿出了一顆爆米花，他露出了頑皮的笑容看著你，「張嘴，我餵你。」
+					你转头看着<<he>>，<<he>>手上拿着一颗爆米花，往上抛，然后在爆米花落下时张嘴接住。接着又从桶子里拿出了爆米花，<<he>>露出了顽皮的笑容看着你，“张嘴，我餵你。”
 					<br><br>
 
-					<<link [[配合|Whitney Extra Mod Lake Popcorn 2]]>><<set $phase to 0>><</link>><<dancedifficulty 1 1000>>
-					<<link [[張開嘴巴|Whitney Extra Mod Lake Popcorn 2]]>><<set $phase to 1>><</link>>
-					<<link [[拒絕|Whitney Extra Mod Lake Popcorn 2]]>><<set $phase to 2>><</link>>
+					<<link [[配合|Whitney Extra Mod Lake Popcorn 2]]>><<set $phase to 0>><<npcincr Whitney love 1>><</link>><<dancedifficulty 1 1000>><<glove>>
+					<br>
+					<<link [[张开嘴巴|Whitney Extra Mod Lake Popcorn 2]]>><<set $phase to 1>><</link>>
+					<br>
+					<<link [[拒绝|Whitney Extra Mod Lake Popcorn 2]]>><<set $phase to 2>><</link>>
 				<<else>>
-					你們一起把剩下的爆米花都吃完了。
+					你们一起把剩下的爆米花都吃完了。
 					<br><br>
 
-					<<link [[繼續|Whitney Extra Mod Lake Leave]]>><</link>>
+					<<link [[继续|Whitney Extra Mod Lake Leave]]>><<handheldon>><</link>>
 				<</if>>
 
 			<<else>> /* 好感 < 27 */
-				「把食物分給那些畜生？蠢斃了。」他抓了一大把爆米花送入自己口中。
+				“把食物分给那些畜生？蠢毙了。”<<he>>抓了一大把爆米花送入自己口中。
 				<br><br>
-				你也拿了點爆米花吃，偶爾將一些爆米花撒入水中，惠特尼沒有阻止你，只是一直沉默地把爆米花往嘴裡塞。
+				你也拿了点爆米花吃，偶尔抓起一把爆米花洒入水中，惠特尼没有阻止你，只是一直沉默地把爆米花往自己嘴里塞。
 				<br><br>
-				你們一起吃完了爆米花後，那些鴨子也滿足地遊離了岸邊。
+				爆米花桶空了之后，那些鸭子也满足地游离了岸边。
 				<br><br>
 
-				<<link [[繼續|Whitney Extra Mod Lake Leave]]>><</link>>
+				<<link [[继续|Whitney Extra Mod Lake Leave]]>><<handheldon>><</link>>
 			<</if>>
-		<<else>> /* 非戀人關係 */	
-			你拿出了爆米花，猶豫了一下，還是鼓起了勇氣把爆米花遞給了惠特尼。當他接過時，你鬆了一口氣，隨後你就看到他直接將爆米花都倒到了地上。你還來不及對此發出疑問，他就把空了的爆米花桶子倒扣在你的頭上，你陷入了一片黑暗，接著他一腳把你踹進了水裡，<span class="red">你的衣服濕透了。</span>你把桶子從頭上拿開來，才恢復了視野，但周圍的鴨子受到了驚嚇，有些開始用堅硬的啄攻擊你。<<water>><<pain 2>><<gpain>>
+		<<else>> /* 非恋人关係 */	
+			你拿出了爆米花，犹豫了一下，还是鼓起了勇气把爆米花递给了惠特尼。当<<he>>接过时，你松了一口气，随后你就看到<<he>>直接将爆米花都倒到了地上。你还来不及对此发出疑问，<<he>>就把空了的爆米花桶子倒扣在你的头上，你陷入了一片黑暗，接着<<he>>一脚把你踹进了水里，<span class="red">你湿透了。</span>你把桶子从头上拿开来，才恢復了视野，但周围的鸭子受到了惊吓，有些开始用坚硬的啄攻击你。<<pain 2>><<gpain>>
+			<br><br><<water>>
+			惠特尼站在湖边笑着看你，直到你狼狈地爬上岸。<<he>>蹲了下来捏住了你的下巴，你的嘴被迫张开，<<he>>将从地上捡起的爆米花弹入你口中，“味道如何？我想你跟这些畜生一样会喜欢地上这些垃圾。”<<stress 12>><<trauma 6>><<npcincr Whitney lust 10>><<ggstress>><<gtrauma>><<gglust>>
 			<br/><br/>
-			惠特尼站在湖邊笑著看你，直到你狼狽地爬上岸。「你這副樣子真不錯。」他蹲了下來捏住了你的下巴，你的嘴被迫張開，他將從地上撿起的爆米花彈入你口中，「味道如何？我想你跟這些畜生一樣會喜歡地上這些垃圾。<<stress 12>><<trauma 6>><<npcincr Whitney lust 10>><<gglust>><<gtrauma>><<ggstress>>
-			<br/><br/>
-			「慢慢享用。」他笑著拍了拍你的臉頰，起身離開了湖邊。
+			“慢慢享用，”<<he>>笑着拍了拍你的脸颊，起身离开了湖边。
 			<br/><br/>
 
 			<<whitExtMod_lakeExit>>
 
-			<<link [[繼續|Lake Shore]]>><</link>>
+			<<link [[继续|Lake Shore]]>><<endevent>><<set $eventskip to 1>><<handheldon>><</link>>
 		<</if>>
 
 :: Whitney Extra Mod Lake Popcorn 2
 	<<set $outside to 1>><<set $location to "lake">><<effects>><<lakeeffects>>
+	<<handheldon>>
 
 	<<switch $phase>>
-		<span class="red"></span>
-<span class="green"></span>
-		<<case 0>>
-			你乖乖地張開了嘴，為了接住他丟歪的爆米花，稍微移動了步伐。
-			
-			<<if $danceSuccess>>
-				<span class="green">你用嘴接住了爆米花。</span>接下來他一下往左丟、一下往右丟，但你都成功地一一接住。
+		<<case 0>> /* 配合 */
+			你乖乖地张开了嘴，为了接住<<he>>丢歪的爆米花，稍微移动了步伐。
+			<<if $danceSuccess>> /* 舞蹈判定成功 */
+				<span class="green">爆米花掉入你的嘴中。</span>你看到惠特尼脸上的笑意更深了，<<he>>直接往没人的地方丢去，你灵巧地跑了过去，将爆米花接住。接下来你为了接<<he>>乱丢的爆米花，不停地往左跑、往右跑。
 				<br><br>
-				「最後一顆，接好。」他把爆米花高高拋起，你認真盯著飛在空中的爆米花，算準落下的時機，張嘴跳起來接到了那顆爆米花。
+				“最后一颗，接好。”<<he>>把爆米花高高抛起，你认真盯着飞在空中的爆米花，算准落下的时机，张嘴跳起来接到了那颗爆米花。
 				<br><br>
-				「不錯。」他鼓掌，「你比那些鴨子厲害多了。」他笑著說道。
+				“不错的表演，”<<he>>鼓掌，用着戏谑的语气说道：“你如果下去跟那些鸭子抢吃的，它们一定会饿死。”
 				<br><br>
-				突然，他把你拉入懷中，「我猜我的小鴨子會想要一點疼愛。」
+				<<he>>抓住了你的肩膀，另一隻手的手指侵入了你的口腔，玩弄着你的舌头，“你这麽贪吃，肯定还没吃饱吧？”<<he>>抓住你肩膀的那隻手微微施力，把你往下压。<<npcincr Whitney lust 5>><<glust>>
 				<br><br>
-				他一隻手溫柔地撫摸著你的腦袋，另一隻手順著你的背脊滑下，撫摸著你的屁股。
 
-
-			<<else>>
-				<span class="red">你絆了一下，</span>朝湖面摔去，在你即將掉入水中時，惠特尼衝了過來並抓住了你的手臂。
+				<<link [[跪下|Whitney Extra Mod Lake Popcorn Oral]]>><<set $sexstart to 1>><</link>>
+				<br>
+				<<link [[咬|Whitney Extra Mod Lake Popcorn Bite]]>><</link>>
+			<<else>> /* 舞蹈判定失败 */
+				<span class="red">你绊了一下，</span>朝湖面摔去，在你即将掉入水中时，惠特尼冲了过来并抓住了你的手臂。
 				<br><br>
-				「媽的，你真蠢。」他憤怒地罵道，把你拉了起來，接著將你緊緊摟入懷中。你才發現爆米花掉了滿地。
+				“妈的，你真蠢，”<<he>>愤怒地骂道，把你拉了起来，接着将你紧紧搂入怀中。你才发现爆米花掉了满地。
 				<br><br>
 
 				<<if $speech_attitude is "meek">>
-					「那些爆米花……對、對不起。」你低著頭說道。
+					“那些爆米花……对、对不起，”你低着头说道。
 				<<elseif $speech_attitude is "bratty">>
-					「那些本來就是我買的。」你撇過頭，「但……抱歉。」
+					“那些本来就是我买的。”你撇过头，“但……抱歉。”
 				<<else>>
-					「抱歉，爆米花沒了。」你說道。
+					“抱歉，爆米花没了……”你带着歉意说道。
 				<</if>>
 				<br><br>
 				
-				「蠢蛋，爆米花再買就好，別再幹傻事了。」他敲了一下你的腦袋，「那些就留給它們明天吃吧。」
+				“蠢蛋，爆米花再买就好，别再干傻事了。”<<he>>敲了一下你的脑袋，“那些就留给它们明天吃吧。”
 				<br><br>
-				你捂著腦袋點了點頭，你們在湖邊抱了一會才分開。	
+				你捂着脑袋点了点头，你们在湖边抱了一会才分开。
+				<br><br>
 
-				<<link [[繼續|Whitney Extra Mod Lake Leave]]>><</link>>
+				<<link [[继续|Whitney Extra Mod Lake Leave]]>><</link>>
 			<</if>>
-		<<case 1>>
-		
-		<<default>> /* $phase is 2 */
+		<<case 1>> /* 张开嘴巴 */
+			你乖乖地张开了嘴，<<he>>连丢了几颗，但全部都丢到了你的脸上，你看着<<he>>窃笑的表情，你怀疑<<he>>是故意的。幸好这种状况没有持续很久，有好几颗都成功地投进了你的嘴里，没一会你的口中便堆满了爆米花。直到<<he>>把空桶子丢到了地上，你才把爆米花嚼碎吃了下去。
+			<br><br>
+			“乖鸭子。”<<he>>走了过来，拍了拍你的脑袋，顺手拿了颗掉在你身上的爆米花，放入自己嘴中。然后帮你把还卡在身上的爆米花都拍到地上，虽然你觉得<<he>>的动作更像在藉机偷摸你。<<arousal 600>><<npcincr Whitney lust 5>><<garousal>><<glust>>
+			<br><br>
 
+			<<link [[继续|Whitney Extra Mod Lake Leave]]>><</link>>
+		<<default>> /* 拒绝、$phase is 2 */
+			你拒绝了惠特尼的幼稚游戏。<<he>>不死心地朝你身上丢了几颗爆米花，但你无动于衷。
+			<br><br>
+			“好吧，”<<he>>一脸失望，“你的嘴最好要有其它更好的用途。”<<he>>把剩馀的爆米花都倒进了自己嘴里，随手将空桶子丢到了地上。
+			<br><br>
+
+			<<link [[继续|Whitney Extra Mod Lake Leave]]>><</link>>
 	<</switch>>
 
+:: Whitney Extra Mod Lake Popcorn Oral
+	<<if $sexstart is 1>>
+		<<set $sexstart to 0>>
+		<<consensual>>
+		<<set $consensual to 1>>
+		<<neutral 1>>
+		<<maninit>>
+		你跪了下来，扯开了<<he>>的裤子。 惠特尼把沾满唾液的手指从你口中拿了出来，抹在了<<he>>的<<if $NPCList[0].penis isnot "none">>肉棒<<else>>小穴<</if>>上，“来吧。”
+		<br><br>
+		<<he>>扣住你的脑袋，把你的脸按在<<he>>的胯下。<<npcoral>>
+	<</if>>
 
+	<<effects>>
+	<<effectsman>>
+	<<man>>
+	<<audience>>
+	<<stateman>>
+	<br><br>
+	<<actionsman>>
 
+	<<if _combatend>>
+		<span id="next"><<link [[继续|Whitney Extra Mod Lake Popcorn Oral Finish]]>><</link>></span><<nexttext>>
+	<<else>>
+		<span id="next"><<link [[继续|Whitney Extra Mod Lake Popcorn Oral]]>><</link>></span><<nexttext>>
+	<</if>>
 
+:: Whitney Extra Mod Lake Popcorn Oral Finish
+	<<set $outside to 1>><<set $location to "lake">><<effects>><<lakeeffects>>
 
-		
-/* 靠近鴨子 */
+	<<if $enemyhealth lte 0>> /* 敌人血量归零 */
+		你把惠特尼推开。“怎麽了？蠢鸭子嘴张不开了？”<<he>>冷笑，但没有再逼迫你。
+	<<elseif $enemyarousal gte $enemyarousalmax>> /* 敌人高潮 */
+		<<ejaculation>>
+
+		<<he>>抓住你的脑袋，大口喘着气。<<npcincr Whitney lust -20>><<llust>>
+		<br><br>
+		<<he>>恢復过来后，用手揉了揉你的脑袋，“真是隻贪吃的小鸭子。”
+		<br><br>
+		惠特尼退了开来，<<print playerBellyVisible() ? "把一根口香糖塞进嘴里" : "点燃了一支菸">>，整理着自己的衣服。
+	<<else>>  /* 要求停下来 */
+		“噢——小鸭子吃不下啦？”<<he>>嘲笑着，“随便你，反正我也玩够了。”	
+	<</if>>
+	<br><br>
+	<<tearful>>你爬了起来。
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[继续|Whitney Extra Mod Lake Leave]]>><</link>>
+
+:: Whitney Extra Mod Lake Popcorn Bite
+	<<set $outside to 1>><<set $location to "lake">><<effects>><<lakeeffects>>
+
+	你张嘴用力咬了下去，惠特尼吃痛地收回手指，不过<<he>>似乎没有生气，轻笑了一声：“看来你还是隻野鸭子。”
+	<br><br>
+
+	<<link [[继续|Whitney Extra Mod Lake Leave]]>><</link>>
+
+/* 靠近鸭子 */
 :: Whitney Extra Mod Lake Duck
 	<<set $outside to 1>><<set $location to "lake">><<effects>><<lakeeffects>>
 
-	<<link [[繼續|Whitney Extra Mod Lake]]>><</link>>
+	你蹲了下来，朝鸭子伸出手。
+	<<if $tendingSuccess>>/* 护理判定成功 */
+		<span class="green">鸭子靠近了你，</span>用头亲暱地蹭着你的手背。你将鸭子抱了起来，抚摸着它柔顺的羽毛。<<stress -6>><<trauma -6>><<lstress>><<ltrauma>>
+		<br><br>
 
-/* 餵鴨子 */
-:: Whitney Extra Mod Lake Feed Duck
+		<<if $whitneyromance is 1>>
+			惠特尼盯着你手中的鸭子，<<he>>似乎很惊讶你能把鸭子抱起来。
+		<<else>>
+			惠特尼只是一直盯着湖面，对你的行为丝毫不感兴趣。
+		<</if>>
+		<br><br>
+
+		<<if $whitneyromance is 1>>
+			<<link [[让惠特尼摸|Whitney Extra Mod Lake Duck 2]]>><<set $phase to 0>><</link>>
+			<br>
+		<</if>>
+
+		<<link [[把鸭子放回湖里|Whitney Extra Mod Lake Duck 2]]>><<set $phase to 1>><</link>>
+
+	<<else>>/* 护理判定失败 */
+		<span class="red">鸭子被你吓到了，</span>全部都游走了。
+		<br><br>
+
+		<<if $whitneyromance is 1 and C.npc.Whitney.love gte 27>>
+			你转头看向惠特尼，<<he>>似乎不太在意，但<<he>>还是把手中的麵包都撕碎，丢进了湖里。
+		<<else>>
+			“原来你是专门来吓鸭子的，”<<he>>嘲笑着你，然后把<<print playerBellyVisible() ? "口香糖吐到地上" : "抽完的菸蒂丢到了地上">>。<<stress 6>><<gstress>>
+		<</if>>
+		<br><br>
+
+		<<link [[继续|Whitney Extra Mod Lake Leave]]>><</link>>
+	<</if>>
+
+:: Whitney Extra Mod Lake Duck 2
 	<<set $outside to 1>><<set $location to "lake">><<effects>><<lakeeffects>>
 
-	<<link [[繼續|Whitney Extra Mod Lake]]>><</link>>
+	<<if $phase is 0>> /* 让惠特尼摸 */
+		<<if $speech_attitude is "meek">>
+			“你想摸摸看它吗？”你说道。
+		<<elseif $speech_attitude is "bratty">>
+			“来吧，你也摸一下，”你说道。
+		<<else>>
+			“你要摸摸看吗？”你说道。
+		<</if>>
+		<br><br>
 
-/* 暴露 */
-:: Whitney Extra Mod Lake Exposed
-<<whitExtMod_lakeExit>>
+		<<if $whitneyromance is 1 and C.npc.Whitney.love gte 27>> /* 高好感 */
+			<<switch random(1,2)>> /* 50%机率 */
+				<<case 1>>
+					<<he>>伸出手小心翼翼地摸着鸭子的羽毛，你看到<<he>>脸上露出了微笑，但当<<he>>注意到你的视线时，<<he>>缩回了手。
+				<<case 2>>
+					<<he>>伸出手时，鸭子突然啄了<<he>>一下，惠特尼迅速缩回了手，小声地骂道：“蠢鸭子！”
+					<br><br>
+					你忍不住笑了出来。<<he>>啧了一声，“笑个屁。”
+			<</switch>>
+			<br><br>
 
-<<link [[繼續|Lake Shore]]>><</link>>
+			惠特尼转过身盯着湖面，你似乎看到<<he>>脸上出现了一抹红晕。<<npcincr Whitney love 1>><<glove>>
+		<<else>> /* 好感 < 27 */
+			“我才不想摸那蠢东西。”你似乎在<<he>>脸上看到了一闪而过的红晕，但<<he>>很快地转过头，将视线移到了湖面上，不再理你。
+		<</if>>
+		<br><br>
+	<</if>>
+	/* 把鸭子放回湖里、两个选项有共通文本跟连结 */
+	你轻轻地将鸭子放回湖里，鸭子用翅膀拍打着水面，你被一些溅起的水花弄湿了<<if $exposed lte 1>>衣服<</if>>。<<set $upperwet += 20>>
+	<br><br>
 
+	<<link [[继续|Whitney Extra Mod Lake]]>><</link>>
 
-/* 離開 */
+/* 说你想餵鸭子 */
+:: Whitney Extra Mod Lake Feed Duck
+	<<set $outside to 1>><<set $location to "lake">><<effects>><<lakeeffects>>
+	
+	<<if $speech_attitude is "meek">>
+		“<<if C.npc.Whitney.love lt 27 or $whitneyromance isnot 1>>我好像看到你在餵它们，<</if>>可以分我一点吗？我也想餵鸭子，”你说道。
+	<<elseif $speech_attitude is "bratty">>
+		“<<if C.npc.Whitney.love lt 27 or $whitneyromance isnot 1>>我看到你把东西塞进口袋里了，<</if>>分我一点，”你说道。
+	<<else>>
+		“<<if C.npc.Whitney.love lt 27 or $whitneyromance isnot 1>>你应该有吃的吧？<</if>>能分我一点吗？”你说道。
+	<</if>>
+	<br><br>
+
+	<<if $whitneyromance is 1>> /* 恋人关係 */
+		<<if C.npc.Whitney.love gte 27>> /* 高好感 */
+			<<he>>把麵包撕成了两半，给了你一份。你把麵包撕成小块丢到鸭子旁边，看着<<he>>们欢快地抢食。没过多久，麵包就被它们吃完了。<<stress -6>><<trauma 6>><<lstress>><<gtrauma>>
+			<br><br>
+			突然，惠特尼把一块白麵包递到了你嘴前，<<he>>笑着看着你。
+			<br><br>
+			<<if $promiscuity gte 15>>
+				<<link [[色情地吃|Whitney Extra Mod Lake Feed Duck 2]]>><<set $phase to 0>><<npcincr Whitney love 1>><</link>><<promiscuous2>><<glove>>
+				<br>
+			<</if>>
+			<<link [[吃|Whitney Extra Mod Lake Feed Duck 2]]>><<set $phase to 1>><</link>>
+			<br>
+			<<link [[拒绝|Whitney Extra Mod Lake Feed Duck 2]]>><<set $phase to 2>><</link>>
+
+		<<else>> /* 好感 < 27 */
+			“我没有那种东西，”惠特尼简短地回答。
+			<br><br>
+			<<he>>的表情看起来很不耐烦，你最好别继续问了。
+			<br><br>
+
+			<<link [[继续|Whitney Extra Mod Lake]]>><</link>>			
+		<</if>>
+	<<else>> /* 非恋人关係 */
+		“我有个更好的想法。”你还没反应过来，惠特尼就用力推了你一把，“你下去当鸭子，我来餵你。”
+		<br><br>
+
+		<<if currentSkillValue('physique') gte random(4000,16000)>> /* 体能判定成功 */
+			<span class="green">你稳住了自己没有摔倒。</span><<he>>不放弃地又推了一下，你闪开了。
+			<br><br>
+			<<he>>看起来很懊恼地踢了一块在地上的小石头，你看着那块石头飞到了湖面，在水上滑行了一段距离才沉入水底。等你回过头时，惠特尼已经不见了。
+		<<else>> /* 体能判定失败 */
+			<span class="red">你重心不稳，</span>跌进了湖里，整个人都湿透了。<<stress 6>><<gstress>>
+			<br><br><<water>>
+			<<he>>站在湖边哈哈大笑，捡起了一块石头瞄准你，“贱人，接好你的点心！”你赶紧潜进水里躲避，你害怕地在水下待了一段时间，但都没有听到石头落水的声音。你小心翼翼地浮上水面，查看情况，发现惠特尼已经不见了。
+		<</if>>
+		<br><br>
+
+		<<whitExtMod_lakeExit>>
+
+		<<link [[继续|Lake Shore]]>><<endevent>><<set $eventskip to 1>><</link>>
+	<</if>>
+
+:: Whitney Extra Mod Lake Feed Duck 2
+	<<set $outside to 1>><<set $location to "lake">><<effects>><<lakeeffects>>
+
+	<<switch $phase>>
+		<<case 0>> /* 色情地吃 */
+			<<if $speech_attitude is "meek">>
+				你害羞地把<<he>>的手指含入嘴中，当你吐出手指时，把麵包也带走了，<<he>>手上沾满了你的唾液。
+			<<elseif $speech_attitude is "bratty">>
+				你含住<<he>>的手指，不轻不重地咬了一口，留下了一个很浅的齿印，才把<<he>>指间的麵包叼走。
+			<<else>>
+				你的用舌头舔舐、缠绕着<<he>>的手指，直到<<he>>手上沾满了你的唾液，才灵巧地用舌头将麵包捲入了你的口中。
+			<</if>>
+			<<promiscuity2>>
+
+			你把麵包吞下后，看到了<<he>>脸上浮现了一丝红晕。突然<<he>>抓了你的手，放到<<he>>的嘴边。<<he>>伸出舌头，慢慢地从你的掌心，一路舔到了指尖，<<he>>的舌头缠绕住你的手指，随后将你的手指含入口中，你感受得到<<he>>嘴中的温度。<<arousal 600>><<garousal>>
+			<br><br>
+			<<he>>露出了顽皮的笑容，咬住了你的手指，你吃痛地缩回手，你的手指上浮现了一个牙印。<<he>>笑着说：“这是回礼。”<<pain 2>><<npcincr Whitney lust 5>><<gpain>><<glust>>
+		<<case 1>> /* 吃 */
+			你张嘴把麵包吃了。
+			<br><br>
+			“真是隻乖鸭子。”<<he>>拍了拍你的脑袋。
+		<<default>> /* 拒绝、$phase is 2 */
+			<<if $speech_attitude is "meek">>
+				“我、我不是鸭子，”你说道。
+			<<elseif $speech_attitude is "bratty">>
+				“喂，我不是鸭子，”你说道。
+			<<else>>
+				“我不是鸭子，”你说道。
+			<</if>>
+			<br><br>
+			
+			“我又没说你是。”惠特尼撇了撇嘴，将手中的麵包抛入水中。
+	<</switch>>
+	<br><br>
+
+	<<link [[继续|Whitney Extra Mod Lake Leave]]>><</link>>
+
+/* 离开 */
 :: Whitney Extra Mod Lake Leave
 	<<set $outside to 1>><<set $location to "lake">><<effects>><<lakeeffects>>
 	
+	<<npc Whitney>><<person1>>
+	/* 设置惠特尼的衣服为皮夹克 */
+	<<npcClothesName $NPCName[$NPCNameList.indexOf("Whitney")] "Whitney">>
+	<<set $NPCList[0].clothes to clone($NPCName[$NPCNameList.indexOf("Whitney")].clothes)>>
 	<<whitExtMod_lakeExit>>
 
 	<<if $whitneyromance is 1>>
-		「我要走了。」但他沒有移動腳步，而是看著你。
+		“我要走了。”但<<he>>没有移动脚步，而是看着你。
 		<br><br>
 
-		<<link [[跟他一起離開森林 (0:40)|Whitney Extra Mod Lake Leave Forest]]>><<pass 40>><</link>>
+		<<for _active_clothes range Object.keys($store)>>
+			<<for _i to 0; _i lt $store[_active_clothes].length; _i++>>
+				<<if $store[_active_clothes][_i].location is "lakeshore">>
+					<<set _temp_clothes_present to 1>>
+					<<break>>
+				<</if>>
+			<</for>>
+		<</for>>
+		
+		<<if _temp_clothes_present is 1>>
+			<<link [[穿上衣服后，跟惠特尼一起离开森林 (0:50)|Whitney Extra Mod Lake Leave Forest]]>><<storeon "lakeshore">><<pass 50>><<set $phase to 0>><</link>>
+			<br>
+		<</if>>
+
+		<<link [[跟惠特尼一起离开森林 (0:40)|Whitney Extra Mod Lake Leave Forest]]>><<pass 40>><<set $phase to 1>><</link>>
 		<br>
 		<<link [[留下|Whitney Extra Mod Lake Leave Refuse]]>><</link>>
 	<<else>>
-		他一言不發地離開了湖邊。
+		<<if $daily.whitney.whitExtMod_leaveDirectly is 1>> /* 非恋人选项选择[离开] */
+			你离开了<<he>>身边。你下意识地回头看了一眼，发现惠特尼已经不见了。
+		<<else>>
+			<<he>>一言不发地离开了湖边。
+		<</if>>
+		<br><br>
+
+		<<link [[继续|Lake Shore]]>><<endevent>><<set $eventskip to 1>><</link>>
 	<</if>>
 
 :: Whitney Extra Mod Lake Leave Forest
-	<<set $outside to 1>><<set $location to "lake">><<effects>><<lakeeffects>>
-
-	<<if $speech_attitude is "meek">>
-		「我可以跟你一起走嗎？」你說道。
-	<<elseif $speech_attitude is "bratty">>
-		「我們一起走吧。」你說道。
-	<<else>>
-		「那走吧。」你說道。
-	<</if>>
-	<br><br>
-
-	<<if $exposed gte 2>>
-		惠特尼脫下了他身上的皮夾克，披在你身上，「勉強還可以應付吧。」<<upperwear 40>><<set $daily.whitney.whitExtMod_clothes to 1>>
-		<br><br>
-	<</if>>
-
-	他牽起你的手，拉著你走入了森林。他走了一條你也不知道的小路。他摟著你，時不時地環顧四周，確保沒有危險靠近。很快的，你們一起穿越了森林，抵達小鎮。<<takeHandholdingVirginity "Whitney" "romantic">><<dry>>
-	<br><br>
-
-	<<link [[繼續|Whitney Extra Mod Lake Leave Forest 2]]>><<endevent>><</link>>
-	
-:: Whitney Extra Mod Lake Leave Forest 2
 	<<set $outside to 1>><<set $location to "town">><<effects>>
 	
-	他直到送你到了孤兒院的門口才放開你。
+	<<if $phase is 0>> /* 穿上衣服后，跟惠特尼一起离开森林 */
+		你带着惠特尼走到了你藏衣服的地方。
+		<br><br>
+		“原来你都把衣服藏在这里啊，”<<he>>露出了不怀好意的笑容，看起来就像是在打什麽坏主意。你尽量不去想以后自己的衣服会不会不翼而飞。你穿上了衣服，整个过程你都感觉得到<<he>>炽热的视线。<<arousal 600>><<npcincr Whitney lust 5>><<garousal>><<glust>>
+		<br><br>
+	<<else>> /* 跟惠特尼一起离开森林 */
+		<<if $speech_attitude is "meek">>
+			“我想跟你一起走，”你说道。
+		<<elseif $speech_attitude is "bratty">>
+			“那走吧，”你说道。
+		<<else>>
+			“我们一起走吧，”你说道。
+		<</if>>
+		<br><br>
+	<</if>>
+
+	<<if $exposed gte 2 or ($worn.upper.name is "naked" and $worn.under_upper.name is "naked" and $player.gender_appearance is "f")>>
+		惠特尼打量着你的身体，“光溜溜的就想回去了？”笑着说：“你这副样子简直就是块肥肉。”
+		<br><br>
+		<<he>>把身上的皮夹克脱掉，<<if $worn.upper.name is "naked">>披在你身上<<else>>绑在你腰间<</if>>，“不要误会了，我只是不想让别人偷吃我的东西。”
+		<br><br>
+		<<set $daily.whitney.whitExtMod_clothes to 1>>
+	<<else>>
+		<<if $phase is 0>> /* 穿上衣服后，跟惠特尼一起离开森林 */
+			你穿好衣服后，
+		<<else>> /* 跟惠特尼一起离开森林 */
+			<<he>>点了点头，接着
+		<</if>>
+	<</if>>
+
+	<<he>>抓住你的手臂，拉着你走入了森林。 进入森林后<<he>>便把你拉近，一路上<<he>>都一直搂着你。<<he>>时不时地环顾四周，确保没有危险靠近。 很快的，你们一起穿越了森林，抵达小镇。<<takeHandholdingVirginity "Whitney" "romantic">><<dry>>
+	<br><br>	
+	<<he>>直到送你到了孤儿院的门口才放开你。
 	<br><br>
-	「不要誤會了，只是不能讓你在荒郊野外被什麼怪東西給啃了。」他從口袋裡掏出一支菸，抬頭看到你還站在門口，
 	
 	<<if $daily.whitney.whitExtMod_clothes is undefined>> 
-		用一隻手把你推了進去，「快進去，別跟我說我還得陪你走到你那破房間。」
+		“不要误会了，只是不能让你在荒郊野外被什麽怪东西给啃了。”<<he>>从口袋里掏出一支菸，抬头看到你还站在门口，<<he>>用一隻手把你推了进去，“快进去，别跟我说我还得陪你走到你那破房间。”
 		<br><br>
-		他轉身離開。你看到黑暗中閃出了火光，消失在小巷之中。
+		<<he>>转身离开。你看到黑暗中闪出了火光，消失在小巷之中。
 		<br><br>
-		<<link [[繼續|Orphanage]]>><<endevent>><</link>>
+		<<link [[继续|Orphanage]]>><<endevent>><<set $eventskip to 1>><</link>>
 	<<else>>
-		他突然把披在你身上的皮夾克抽走，笑著說：「快回房間去，否則你就要被其它人看光光了。」<<upperstrip>>
+		你站在孤儿院门口，还没来得向惠特尼道谢，<<he>>就突然把你身上的皮夹克抽走，笑着说：“快回房间去，否则你就要被其它人看光光了！”
 		<br><br>
-		<<link [[跑回房間|Bedroom]]>><<endevent>><<upperruined>><<set $daily.whitney.whitExtMod_clothes to 0>><</link>>
+		
+		<<link [[跑回房间|Bedroom]]>><<endevent>><<set $eventskip to 1>><<set $daily.whitney.whitExtMod_clothes to 0>><</link>>
 	<</if>>
 
 :: Whitney Extra Mod Lake Leave Refuse
 	<<set $outside to 1>><<set $location to "lake">><<effects>><<lakeeffects>>
 
 	<<if $speech_attitude is "meek">>
-		「我……現在還不能走，抱歉。」你說道。
+		“我……现在还不能走，抱歉，”你说道。
 	<<elseif $speech_attitude is "bratty">>
-		「你走吧，我還沒有要回去。」你說道。
+		“你走吧，我还没有要回去，”你说道。
 	<<else>>
-		「我還不想回去。」你說道。
+		“我还不想回去，”你说道。
 	<</if>>
 	<br><br>
 
-	惠特尼皺著眉頭看著你，你以為他生氣了。但他突然他抱住了你，「注意安全。」他說道：「別受傷了，否則你就沒用了。」
+	惠特尼皱着眉头看着你，你以为<<he>>生气了。<<he>>用力地抓住你的手臂，下一秒你就跌进了<<he>>的怀里，<<he>>在你的额头上轻轻留下一吻，“注意安全，”<<he>>说道：“别受伤了，否则你就没用了。”
 	<br><br>
-	他在你的額頭上留下了一吻後，轉身離開了湖邊。
+	你还没反应过来，<<he>>就把你推开了，转身离开了湖边。你目送着<<he>>离开。
 	<br><br>
 
-	<<link [[繼續|Lake Shore]]>><<endevent>><<set $eventskip to 1>><</link>>
+	<<link [[继续|Lake Shore]]>><<endevent>><<set $eventskip to 1>><</link>>

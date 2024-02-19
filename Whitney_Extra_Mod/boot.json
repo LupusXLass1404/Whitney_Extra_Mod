@@ -1,27 +1,38 @@
 {
   "name": "Whitney_Extra_Mod",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "styleFileList": [],
   "scriptFileList": [
     "game/03-JavaScript/whitney_extra_mod_fn.js"
   ],
   "tweeFileList": [
-    "game/whitney_extra_mod_lake.twee",
+    "game/whitney_extra_mod_lake.twee"
   ],
-  "imgFileList": [],
+  "imgFileList": [
+    "img/misc/icon/whitExtMod_lakeduck.png",
+    "img/misc/icon/whitExtMod_duck.png",
+    "img/misc/icon/whitExtMod_toast.png"
+  ],
   "additionFile": [
     "README.md"
   ],
   "addonPlugin": [
     {
+      "modName": "ModLoader DoL ImageLoaderHook",
+      "addonName": "ImageLoaderAddon",
+      "modVersion": "^2.3.0",
+      "params": [
+      ]
+    },
+    {
       "modName": "ReplacePatcher",
       "addonName": "ReplacePatcherAddon",
-      "modVersion": "1.0.0",
+      "modVersion": "0.0.1",
       "params": {
         "js": [
           {
             "from": "text: V.whitney_text,",
-            "to": "text: V.whitney_text,\n\t\t\t\twhitExtMod_lake: V.whitextmod_lake,\n\t\t\t\twhitExtMod_duck: V.whitextmod_duck,\n\n\t\twhitExtMod_clothes: V.whitextmod_clothes,",
+            "to": "text: V.whitney_text,\n\t\t\t\twhitExtMod_lake: V.whitextmod_lake,\n\t\t\t\twhitExtMod_duck: V.whitextmod_duck,\n\t\t\t\twhitExtMod_clothes: V.whitextmod_clothes,\n\t\t\t\twhitExtMod_feed: V.whitExtMod_feed,\n\t\t\t\twhitExtMod_exposed: V.whitExtMod_exposed,\n\t\t\t\twhitExtMod_leaveDirectly: V.whitExtMod_leaveDirectly,",
             "fileName": "ingame.js"
           }
         ]
@@ -48,6 +59,10 @@
     {
       "modName": "ReplacePatcher",
       "version": "^1.0.0"
+    },
+    {
+      "modName": "ModLoader DoL ImageLoaderHook",
+      "version": "^2.3.0"
     }
   ]
 }
