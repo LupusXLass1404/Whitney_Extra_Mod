@@ -1,0 +1,321 @@
+/* 热巧克力 */
+:: Whitney Extra Mod Park Robin Chocolate
+    <<effects>>
+
+    <<npc Whitney>><<person1>>
+
+    “好的！一杯热巧克力，马上就来！”罗宾说着，转身去加热牛奶。
+    <br><br>
+    你把£2放在桌上，等到热巧克力准备好后你接过了杯子。
+    <br><br>
+
+    <<if $robinpaid is 1 and $daily.robin.freeDrink isnot 1>>
+        “我，我不能收你的钱……”<<nnpc_his "Robin">>说。
+        <br><br>
+        “不是我要喝的。”你指了指站在喷泉旁的惠特尼。
+        <br><br>
+        “噢。”罗宾看上去有些困惑，但还是收走了你放在桌上的钱。
+
+    <<else>>
+        “谢谢您的购买！”<<nnpc_his "Robin">>笑着说，把钱放在柜台下面的某个地方。
+
+    <</if>>
+    <br><br>
+
+    <<link [[继续|Whitney Extra Mod Park Chocolate]]>><</link>>
+
+
+:: Whitney Extra Mod Park Chocolate
+    <<effects>>
+
+    你手上拿着还冒着白烟的热巧克力，走到了惠特尼旁边<<if playerBellyVisible()>>，当<<he>>看到你靠近时，把嘴裡的菸拿掉了<</if>>。<<he>>注意到了你手上拿着的东西。
+    <br><br>
+    你将热巧克力递给<<he>>，“要喝一口吗？”
+    <br><br>
+
+    <<link [[把热巧克力给惠特尼|Whitney Extra Mod Park Chocolate 2]]>><<set $phase to 0>><</link>>
+    <br>
+    <<link [[含一口到嘴裡|Whitney Extra Mod Park Chocolate 2]]>><<set $phase to 1>><</link>>
+    <br>
+    <<link [[自己喝|Whitney Extra Mod Park Chocolate 2]]>><<set $phase to 2>><</link>>
+
+:: Whitney Extra Mod Park Chocolate 2
+    <<effects>>
+
+    <<if $phase is 0>> /* 把热巧克力给惠特尼 */
+        惠特尼惊讶地看着你，脸上出现了一丝红晕，“谢啦，荡妇，我正想要这个。”
+        <br><br>
+        <<he>>用手臂揽住了你的肩膀，安静地喝着手上的热巧克力。你靠在<<he>>身上，<<if Weather.temperature <= 15>>寒冷的天气让你<</if>>缩在了<<he>>的怀裡，随着时间过去你出现了一丝睡意，你的眼半阖着。惠特尼将手贴到了你的脸上，刚拿着热巧克力的手温暖了你冰冷的脸颊。<<stress -6>><<lstress>>
+        <br><br>
+        你的脸贴着<<he>>的掌心，随后沉沉地闭上了眼。但你还没来得及入睡，你就感受到了脸上不舒服的压迫感，你睁开眼睛，看到<<he>>正用着两隻手掌用力揉搓着你的脸颊，你<<if $speech_attitude is "meek">>哀怨<<elseif $speech_attitude is "bratty">>愤怒<<else>>无奈<</if>>地看着<<he>>，但<<he>>只是笑着，捏住了你的脸颊，用力拉长——你想你现在的脸一定很难看。<<pain 2>><<gpain>>
+        <br><br>
+        “瞌睡虫，清醒了吗？”<<he>>看着你的脸笑出了声，才放开你饱受折磨的脸颊，“别睡在公园，回你那破狗窝睡。”<<npcincr Whitney love 1>><<glove>>
+        <br><br>
+
+        <<link [[继续|Park]]>><<endevent>><<set $eventskip to 1>><</link>>
+
+    <<elseif $phase is 1>> /* 含一口到嘴裡 */
+        你缩回了拿着杯子的手，喝了一口含到了嘴裡。你在<<he>>还没从困惑中反应过来前，迅速靠近并吻上<<he>>的嘴唇，用舌头将甜腻的液体推入<<he>>的口中。<<he>>很惊讶，但很快就反应过来，吞下了口中的热巧克力，开始回吻你。
+        <br><br>
+        你的嘴裡已经没有任何东西了，但惠特尼没有打算放过你。<<he>>的手按住了你的头，舌头更进一步的侵入进来，<<he>>仔细地舔舐着口腔中的每一处，彷彿是想把你嘴裡残留的巧克力也舔乾淨，直到你快喘不过气时，才放开了你。<<arousal 400 "mouth">><<npcincr Whitney lust 5>><<garousal>><<glust>>
+        <br><br>
+        当你回过神来，发现自己手上的杯子已经不见了，而<<he>>正带着得意的笑容看着你，从容地喝了一口从你手上抢来的热巧克力。<<npcincr Whitney love 1>><<glove>>
+        <br><br>
+
+        <<link [[继续|Park]]>><<endevent>><<set $eventskip to 1>><</link>>
+
+    <<else>> /* 自己喝 */
+        你缩回了拿着杯子的手，然后喝了一口热巧克力，惠特尼露出了困惑的表情，但你只是装作无故地对着<<he>>眨了眨眼。<<he>>在反应过来后笑出了声，“你在耍我。”
+        <br><br>
+        <<if $speech_attitude is "meek">>
+            “你想喝的话可以去那边买。”你指了指罗宾的摊位。
+        <<elseif $speech_attitude is "bratty">>
+            “这是我要喝的，想喝自己掏钱去买。”你又炫耀似地喝了一口。
+        <<else>>
+            “我只是问问而已。”你吐了吐舌头。
+        <</if>>
+        <br><br>
+        <<he>>看起来没有生气，只是<<print playerBellyVisible() ? "悠閒地吸了口菸" : "往嘴裡塞了一根口香糖">>。这次换你感到疑惑了，但还没来得及想通，<<he>>就抓住了你的肩膀，把你拉了过去，将<<print playerBellyVisible() ? "口香糖吐进了" : "菸蒂丢进了">>杯子裡。
+        <br><br>
+        “真抱歉，我不小心的。”<<he>>的脸上还带着笑容，而且语气中没有丝毫歉意。<<he>>放开了你，径直走向了喷泉，很快地就从水裡捞出了几个硬币，丢给了你，刚好是<<moneyGain 4>>。
+        <br><br>
+        “当做补偿，我请你一杯。然后做个好<<girlfriend>>，顺便帮我买一杯。”<<he>>拍了拍你的头，走回了树下从口袋裡掏出一支菸，但只是叼在嘴中，没有点燃。
+        <br><br>
+
+        <<link [[买热巧克力 (£4)|Whitney Extra Mod Park Chocolate 3]]>><<set $phase to 1>><<set $money -= 400>><</link>>
+        <br>
+        <<link [[直接离开|Whitney Extra Mod Park Chocolate 3]]>><<set $phase to 0>><</link>>
+
+    <</if>>
+
+:: Whitney Extra Mod Park Chocolate 3
+    <<effects>>
+
+    <<if $phase is 0>> /* 直接离开 */
+        你决定带着钱直接离开。走远后你回头看了一眼，<<he>>已经将菸点燃，望着喷泉。
+
+    <<else>> /* 买热巧克力 */
+        你回到了罗宾的热巧克力摊，买了两杯热巧克力。“你们怎麽了吗？”罗宾脸上带着疑惑地问道。
+        <br><br>
+        你摇了摇头表示没事，把惠特尼刚才给你的钱放到了桌上，然后带着两杯热巧克力返回了喷泉旁，把其中一杯给了惠特尼。
+        <br><br>
+        “谢啦。”<<he>>接过杯子后喝了一口，看起来很满意。<<npcincr Whitney love 1>><<glove>>
+        <br><br>
+        你待在<<he>>旁边，喝着手中的热巧克力，一边向<<he>>讲述着你的日常生活。虽然惠特尼只是一直盯着喷泉，但你感觉<<he>>有在倾听。<<stress -6>><<lstress>>
+        <br><br>
+        当<<he>>把手中空了的杯子扔到地上后，漫不经心地说道：“下次记得回请我。”
+
+    <</if>>
+    <br><br>
+
+    <<link [[继续|Park]]>><<endevent>><<set $eventskip to 1>><</link>>
+
+/* 雪球 */
+:: Whitney Extra Mod Park Snowball
+    <<effects>>
+
+    <<if $phase is 0>> /* 无视 */
+        你拍掉了身上的雪，继续前行。
+        <br><br>
+
+        <<link [[继续|Park]]>><<endevent>><</link>>
+
+    <<else>> /* 丢雪球 */
+        你捏起了一颗雪球，丢向了惠特尼，
+
+        <<if currentSkillValue("handskill") gte random(1, 800)>> /* 手部技巧判定成功 */
+            <span class="green">雪球正中了<<he>>的脸，</span><<he>>露出了错愕的表情，但<<he>>马上就把脸上的雪抹掉，并朝你冲了过来。
+
+            <br><br>
+
+            <<link [[待在原地|Whitney Extra Mod Park Snowball 2]]>><<set $phase to 1>><</link>>
+            <br>
+            <<link [[逃跑|Whitney Extra Mod Park Snowball 2]]>><<set $phase to 0>><</link>>
+
+        <<else>> /* 手部技巧判定失败 */
+            <span class="red">但你丢歪了，雪球从<<he>>的头顶上飞过。</span><<he>>马上蹲下捏起了一颗雪球，雪球朝你飞了过来，击中了你的脸，你失去平衡滑倒在冰面上。<<pain 4>><<gpain>>
+            <br><br>
+
+            <<if $whitneyromance is 1>> /* 恋人关係 */
+                你听到了惠特尼的嘲笑声，<<he>>朝你走了过来，并把你拉了起来，“你真是个废物。”
+                <br><br>
+                <<he>>伸出手，把你脸上的雪拍掉，接着将双手放到了你的后颈，<<he>>的手很冰，你下意识地缩了一下脖子。<<he>>慢慢往下摸索，摸到了你的后背，手不安分地继续往下滑，<<he>>把手放到了你<<bottom>>上，用力揉捏了几下。<<arousal 200>><<garousal>>
+                <br><br>
+                “至少你用来暖手还不错。”<<he>>笑着把你推开，走向了喷泉。
+
+            <<else>> /* 非恋人关係 */
+                你听到了<<he>>的嘲笑声，接着又有一颗雪球砸到了你的身上。<<stress 6>><<gstress>>
+                <br><br>
+                当你站起身的时，看到惠特尼在喷泉旁的树下点起了一根菸。
+
+            <</if>>
+            <br><br>
+
+            <<link [[继续|Park]]>><<endevent>><<set $eventskip to 1>><</link>>
+
+        <</if>>
+    <</if>>
+
+:: Whitney Extra Mod Park Snowball 2
+    <<effects>>
+
+    <<if $phase is 0>> /* 逃跑 */
+        你转身就跑，你跑出了好一段距离后，小心地回头望去，惠特尼没有追过来。
+        <br><br>
+
+        <<link [[继续|Park]]>><<endevent>><<set $eventskip to 1>><</link>>
+
+    <<else>> /* 待在原地 */
+        <<if $whitneyromance is 1>> /* 恋人关係 */
+            <<he>>把你推倒在雪地上，身体压在了你身上，<<he>>突然吻住了你，同时你感觉到<<he>>的下体在蹭着你。<<arousal 200>><<garousal>>
+            <br><br>
+
+            <<link [["磨蹭" + $NPCList[0].pronouns.him|Whitney Extra Mod Park Snowball 3]]>><<set $phase to 0>><<npcincr Whitney love 1>><</link>><<promiscuous1>><<glove>>
+            <br>
+            <<link [[顺其自然|Whitney Extra Mod Park Snowball 3]]>><<set $phase to 1>><<stress 6>><<trauma 6>><<npcincr Whitney dom 1>><</link>><<gstress>><<gtrauma>><<gdom>>
+            <br>
+            <<link [["推开" + $NPCList[0].pronouns.him|Whitney Extra Mod Park Snowball 3]]>><<set $phase to 2>><<npcincr Whitney dom -1>><</link>><<ldom>>
+
+        <<else>> /* 非恋人关係 */
+            <<he>>的一隻手抓住了你，另一隻手迅速地<<if $worn.under_lower.type.includes("naked")>>摸向你的下体<<else>>鑽进了你的$worn.lower.cn_name_cap裡<</if>>，你突然感觉到寒冷刺痛着你的<<genitals>>，惠特尼把一大坨雪<<if $worn.under_lower.type.includes("naked")>>抹在了你的胯下<<else>>放进了你的$worn.under_lower.cn_name_cap裡<</if>>！<<pain 4>><<gpain>>
+            <br><br>
+            “这是你自找的，<<bitch>>。”<<he>>笑着把你推开，你急忙地把<<if $worn.under_lower.type.includes("naked")>>沾在下体上<<else>>$worn.under_lower.cn_name_cap裡<</if>>的雪清理乾淨。
+            <br><br>
+
+            <<link [[继续|Park]]>><<endevent>><<set $eventskip to 1>><</link>>
+
+        <</if>>
+    <</if>>
+
+:: Whitney Extra Mod Park Snowball 3
+    <<effects>>
+
+    <<if $phase is 0>> /* 磨蹭TA */
+        你回吻着<<he>>，
+        <<if $speech_attitude is "meek">>
+            含住了<<he>>探入你口腔内的舌头，慢慢地吸吮着。
+        <<elseif $speech_attitude is "bratty">>
+            将舌头伸入<<he>>的口中，挑逗着<<he>>的舌头。
+        <<else>>
+            舔舐着<<he>>伸过来的舌头，你们的舌头相互交缠着。
+        <</if>>
+        <<promiscuity1>>
+
+        <<if $NPCList[0].penis isnot "none">> /* 阴茎 */
+            你蹭向了<<he>>的下体，大片的布料摩擦着彼此，惠特尼把下半身紧紧地压在你身上，享受着你的动作。<<he>>硬挺的肉棒在布料下顶出了一个明显的型状，当那个硬物磨擦过你的下体时，总能让你的嘴中漏出呻吟。
+        <<else>> /* 阴道 */
+            你抬起一隻腿的膝盖塞入<<he>>的大腿之间，用膝盖抵住<<he>>的阴蒂。惠特尼注意到你的动作后，也主动地夹住你的大腿，隔着布料用你的腿磨擦着<<he>>的敏感点，同时大力揉捏着你的<<bottom>>。
+        <</if>>
+        <<arousal 2000>><<ggarousal>>
+        <br><br>
+
+        <<if $arousal gte $arousalmax>>
+            持续的磨擦将你推向了高潮的顶峰，<<orgasm>>
+
+            “这样就射了？你真是个骚货，”<<he>>笑着说，移动了身体，坐到你的脸上，扯下了裤子，“不能只有你自己爽了，来吧。”
+            <br><br>
+
+            <<link [[继续|Whitney Extra Mod Park Snowball Sex]]>><<set $sexstart to 1>><</link>>
+
+        <<else>>
+            没过多久，<<he>>停了下来，而<<if $player.penisExist>>你在衣服下的阴茎已经硬了<<else>>你与<<he>>下体摩擦的布料已经变得湿润了<</if>>，<<he>>呼出了一口气，离开了你身上，站了起来。正当你准备跟着起身时，<<he>>突然用脚踩在你的裆部上，阻止你站起来。<<npcincr Whitney lust 10>><<gglust>>
+            <br><br>
+            “你挺上道的，这次就放过你。”<<he>>笑着说道，不轻不重地踩了踩你的下体，随后<<he>>走向了喷泉旁的树下，点起了菸。
+            <br><br>
+
+            <<link [[继续|Park]]>><<endevent>><<set $eventskip to 1>><</link>>
+
+        <</if>>
+    <<elseif $phase is 1>> /* 顺其自然 */
+        <<he>>的舌头分开了你的双唇，探入到口中并在嘴内裡随意地舔舐着，下体也用力顶向你的胯下，你努力忍受着布料摩擦造成的快感。<<arousal 1000>><<npcincr Whitney lust 5>><<garousal>><<glust>>
+        <br><br>
+
+        <<if $arousal gte $arousalmax>>
+            持续的磨擦将你推向了高潮的顶峰，<<orgasm>>
+
+            “这样就射了？你真是个骚货，”<<he>>笑着说道，移动了身体，坐到你的脸上，扯开了<<he>>的<<npcClothesText $NPCList[0] "lower">>，“不能只有你自己爽了，来吧。”
+            <br><br>
+
+            <<link [[继续|Whitney Extra Mod Park Snowball Sex]]>><<set $molestationstart to 1>><</link>>
+
+        <<else>>
+            还好<<he>>没有持续很久就停了下来，“你挺乖的，这次就放过你。”<<he>>满意地拍了拍你的头，然后离开你身上。
+            <br><br>
+            等你站起来时，惠特尼已经走到了喷泉旁的树下，抽起了菸。
+            <br><br>
+
+            <<link [[继续|Park]]>><<endevent>><<set $eventskip to 1>><</link>>
+
+        <</if>>
+    <<else>> /* 推开 */
+        你撇过头，躲避<<he>>的亲吻和骚扰。<<he>>抓住你的头发想把你固定住，但你继续挣扎着。突然，<<he>>咬了你的脖子，突如其来的疼痛让你叫了出来。<<pain 4>><<gpain>>
+        <br><br>
+        <<he>>看到你的反应后笑出了声，离开了你身上，“这次先放过你。”
+        <br><br>
+        等你站起来时，惠特尼已经走到了喷泉旁的树下，抽起了菸。
+        <br><br>
+
+        <<link [[继续|Park]]>><<endevent>><<set $eventskip to 1>><</link>>
+
+    <</if>>
+
+:: Whitney Extra Mod Park Snowball Sex
+    <<if $molestationstart is 1>>
+        <<set $molestationstart to 0>>
+        <<controlloss>>
+        <<violence 1>>
+        <<neutral 1>>
+        <<molested>>
+
+        <<maninit>><<set $position to "missionary">><<npcoral>>
+    <</if>>
+
+    <<if $sexstart is 1>>
+        <<set $sexstart to 0>>
+        <<consensual>>
+        <<set $consensual to 1>>
+        <<neutral 1>>
+
+        <<maninit>><<set $position to "missionary">><<npcoral>>
+    <</if>>
+
+    <<effects>>
+    <<effectsman>>
+    <<man>>
+    <<stateman>>
+    <br><br>
+    <<actionsman>>
+
+    <<if _combatend>>
+        <span id="next"><<link [[继续|Whitney Extra Mod Park Snowball Sex Finish]]>><</link>></span><<nexttext>>
+    <<else>>
+        <span id="next"><<link [[继续|Whitney Extra Mod Park Snowball Sex]]>><</link>></span><<nexttext>>
+    <</if>>
+
+:: Whitney Extra Mod Park Snowball Sex Finish
+	<<effects>>
+
+	<<if $enemyarousal gte $enemyarousalmax>>
+		<<ejaculation>>
+		<<he>>喘着气，按住你的头，将下体紧紧地贴在你的脸上。<<npcincr Whitney lust -20>>
+        <br><br>
+        “做得不错，这次就原谅你。”惠特尼看上去很满意，<<he>>整理好衣服后才离开了你身上，走向了喷泉。
+        <br><br>
+        <<tearful>>你站起身。
+
+	<<elseif $enemyhealth lte 0>>
+        你把惠特尼推开，<<he>>跌到了雪地上。
+        <br><br>
+        <<tearful>>你站了起来，逃离了现场。
+
+	<<else>>
+        “你之后得补偿我，<<bitch>>。”惠特尼看上去很不满，但<<he>>还是离开了你身上，走向了喷泉。
+        <br><br>
+        <<tearful>>你站起身。
+
+	<</if>>
+    <br><br>
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[继续|Park]]>><<endevent>><<set $eventskip to 1>><</link>>

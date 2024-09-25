@@ -1,0 +1,33 @@
+
+
+/* 滑翔 */
+:: Whitney Extra Mod School Roof Glide
+<<effects>>
+
+<<if $daily.whitExtMod_schoolRoofGlide is true>> /* 預設 */
+    你踏上了天台的柵欄，張開翅膀跳了出去，讓風帶著你緩慢著陸。
+<<else>>
+    你展開翅膀踏上了天台的柵欄上。
+    <<if $whitExtMod.schoolRoofGlide is undefined>>
+        <<set $whitExtMod.knowGlide is true>>
+        你在空中看到了惠特尼在其中一顆樹下抽菸。
+
+        當你落地時，惠特尼才發現你，他一臉震驚，手中的菸掉到了地上。
+
+        「你從哪掉下來的？」他大步走了過來，看起來很困惑。手摸了摸你，確認你沒事之後才離開你。
+
+        「我現在沒心情陪你，去別的地方玩吧。」他把你推開，靠著樹繼續抽菸。
+
+        你瞄準了一個無人的空地準備降落，但突然一個人影衝了出來，擋在了降落的路徑上。你來不及轉變方向，就這樣撲進了他的懷裡。
+
+    <<else >>
+
+    <</if>>
+<</if>>
+
+
+/* 儲精罐 */
+:: Whitney Extra Mod School Roof Cumdump
+
+
+

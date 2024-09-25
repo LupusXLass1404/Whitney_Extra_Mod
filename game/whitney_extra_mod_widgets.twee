@@ -1,0 +1,150 @@
+:: Whitney Extra Mod Widgets [widget]
+/* 初始化 */
+<<widget "whitExtMod_init">>
+
+    <<if $whitExtMod is undefined>>
+	    <<set $whitExtMod to {}>>
+        <<whitExtMod_disable>>
+	<<else>>
+		<<whitExtMod_disable>>
+    <</if>>
+
+<</widget>>
+
+<<widget "whitExtMod_disable">>
+	/* 食物插入 */
+	<<if $whitExtMod.foodInsertionDisable is undefined>>
+		<<set $whitExtMod.foodInsertionDisable to "t">>
+	<</if>>
+
+	<<set $_eventList = [
+		"lakeDuck",
+		"parkChocolate",
+		"parkSnowball",
+		"schoolRoofGlide",
+		"schoolRoofCumdump",
+	]>>
+
+	<<for _whitExtModEvent range $_eventList>>
+		<<if $whitExtMod[_whitExtModEvent + "Disable"] is undefined>>
+			<<set $whitExtMod[_whitExtModEvent + "Disable"] to "f">>
+		<</if>>
+	<</for>>
+
+<</widget>>
+
+/* 遊戲設置 */
+<<widget "whitExtMod_options">>
+
+    <<if $NPCName[_npcId].nam is "Whitney">>
+        <div class="settingsToggleItemWide">
+			<span class="gold">Whitney Extra Mod 性癖設置：</span>
+			<br>
+			<label>
+		        <<checkbox "$whitExtMod.foodInsertionDisable" "t" "f" autocheck>> <mouse class = "tooltip"> 啟用食物插入<span>用食物插入小穴或肛門，但不包括強制餵食。</span></mouse>
+		    </label>
+		</div>
+
+		<div class="settingsToggleItemWide">
+			<span class="gold">Whitney Extra Mod 事件啟用：</span>
+			<br>
+			<label><<checkbox "$whitExtMod.schoolRoofGlideDisable" "t" "f" autocheck>> 學校 - 天台 - 滑翔</label><br>
+			<label><<checkbox "$whitExtMod.schoolRoofCumdumpDisable" "t" "f" autocheck>> 學校 - 天台 - 儲精罐</label><br>
+            <label><<checkbox "$whitExtMod.parkChocolateDisable" "t" "f" autocheck>> 公園 - 熱巧克力</label><br>
+            <label><<checkbox "$whitExtMod.parkSnowballDisable" "t" "f" autocheck>> 公園 - 雪球</label><br>
+			<label><<checkbox "$whitExtMod.lakeDuckDisable" "t" "f" autocheck>> 湖泊 - 餵鴨子</label>
+		</div>
+	<</if>> /* Disable */
+
+<</widget>>
+
+/* 湖泊 - 餵鴨子 */
+<<widget "whitExtMod_lake">>
+	<<if whitExtMod_isInLakeDuck()>>
+		<<if $daily.whitney.whitExtMod_lake gte 1>>
+			鸭子們已经离开了岸边。惠特尼踢着地上的小石头，石头落到水里溅起了水花。<span class="blue"><<nnpc_He "Whitney">>时不时地看向你。</span>
+		<<else>>
+			你看到有个被烟雾环绕的人影站在湖边，是惠特尼。那附近有一群鸭子。
+		<</if>>
+		<br>
+		/* Tip <<nnpc_He "Whitney">>似乎不欢迎你，如果你更暴露一点或许<<nnpc_He "Whitney">>会感性趣 */
+		<<if $exhibitionism gte 75 or $exposed lte 1>>
+			<<if $daily.whitney.whitExtMod_lake gte 1>>
+				<<askicon>><<link [[靠近|Whitney Extra Mod Lake Leave]]>><</link>>
+			<<elseif $exposed is 2>>
+				<<whitExtMod_lakeduckicon>><<link [[靠近|Whitney Extra Mod Lake]]>><<set $phase to 0>><</link>><<exhibitionist5>>
+			<<else>>
+				<<whitExtMod_lakeduckicon>><<link [[靠近|Whitney Extra Mod Lake]]>><<set $phase to 1>><</link>>
+			<</if>>
+		<<else>>
+			<span class="blue">你现在光着身子，不敢靠近<<nnpc_He "Whitney">>。</span>
+		<</if>>
+
+		<br><br>
+	<</if>>
+<</widget>>
+
+/* 湖泊 - 餵鴨子：惠特尼离开 */
+<<widget "whitExtMod_lakeExit">>
+	<<set $daily.whitney.whitExtMod_lake to 0>>
+<</widget>>
+
+/* 公園 - 熱巧克力 */
+<<widget "whitExtMod_parkChocolate">>
+    <<if isInPark("whitney") and $whitneyromance is 1 and $daily.whitney.whitExtMod_parkChocolate is undefined and $whitExtMod.parkChocolateDisable is "f">>
+        <br>
+		<<foodicon "cocoa">><<link [[给惠特尼买热巧克力 (£2 0:20)|Whitney Extra Mod Park Robin Chocolate]]>><<set $money -= 200>><<pass 20>><<set $daily.whitney.whitExtMod_parkChocolate to 1>><</link>>
+	<</if>>
+<</widget>>
+
+/* 公園 - 雪球 */
+<<widget "whitExtMod_parkSnowball">>
+    <<set $daily.whitney.whitExtMod_parkSnowball to 1>>
+    <<npc Whitney>><<person1>>
+
+    你突然被一个湿湿的雪球砸了。你转身看去，是惠特尼，<<he>>快速地擦着手上的雪。<<if isLoveInterest("Whitney")>><<stress -3>><<lstress>><<else>><<stress 12>><<ggstress>><</if>>
+    <br><br>
+    <<link [[丢雪球|Whitney Extra Mod Park Snowball]]>><<set $phase to 1>><</link>><<skill_difficulty `currentSkillValue("handskill")` "手部技巧" 1 800>>
+    <br>
+    <<link [[无视|Whitney Extra Mod Park Snowball]]>><<set $phase to 0>><</link>>
+<</widget>>
+
+/* 學校 - 天台 - 滑翔 */
+<<widget "whitExtMod_schoolRoofGlide">>
+	<<if $whitExtMod.schoolRoofGlideDisable is "f" and ($harpy gte 6 or $angel gte 6 or $demon gte 6 or $fallenangel gte 2)>>
+		<br>
+    	<<glideicon>><<link [[向下滑翔|Whitney Extra Mod School Roof Glide]]>><</link>><<flight_text>>
+	<</if>>
+<</widget>>
+
+/* 學校 - 天台 - 儲精罐 */
+<<widget "whitExtMod_schoolRoofCumdump">>
+	<<if $whitExtMod.schoolRoofCumdumpDisable is "f" and maleChance() lte random(1,100)>>
+		<<addinlineevent "whitExtMod_roof_cumdump">>
+			你走上天台後，看到了惠特尼跟他的朋友們坐在了一旁。惠特尼也看到了你，他突然露出了一個笑容，轉頭跟旁邊的朋友們說了些什麼後，他們都笑了起來。
+			<br><br>
+			接著，惠特尼站起身，走了過來。
+			<br><br>
+
+			<<link [[逃跑|Whitney Extra Mod School Roof Cumdump]]>><</link>>
+			<br>
+			<<link [[站在原地|Whitney Extra Mod School Roof Cumdump]]>><</link>>
+			<br>
+		<</addinlineevent>>
+	<</if>>
+<</widget>>
+
+
+/* icon */
+	/* 湖泊 - 餵鴨子 */
+<<widget "whitExtMod_lakeduckicon">>
+	<<icon "whitExtMod_lakeduck.png">>
+<</widget>>
+
+<<widget "whitExtMod_duckicon">>
+	<<icon "whitExtMod_duck.png">>
+<</widget>>
+
+<<widget "whitExtMod_toasticon">>
+	<<icon "whitExtMod_toast.png">>
+<</widget>>

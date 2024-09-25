@@ -1,0 +1,27 @@
+:: Whitney Extra Mod Test
+<<set _Wp to `Whitney Extra Mod Test`>>
+
+非／戀人關係：<span class="glod"><<= $whitneyromance is 1 ? `戀人` : `非戀`>></span>
+| <<link [[非戀|_Wp]]>><<set $whitneyromance to 0>><</link>>
+| <<link [[戀人|_Wp]]>><<set $whitneyromance to 1>><</link>>
+<br><br>
+
+事件連結：
+<br>
+<<link [[學校 - 天台 - 滑翔|_Wp]]>><</link>>
+<br>
+<<link [[學校 - 天台 - 儲精罐|_Wp]]>><</link>>
+<br>
+<<link [[公園 - 熱巧克力|_Wp]]>><</link>>
+<br>
+<<link [[公園 - 雪球|_Wp]]>><</link>>
+<br>
+<<link [[湖泊 - 餵鴨子|_Wp]]>><</link>>
+<br>
+/* <<link [[|_Wp]]>><</link>> */
+<br><br>
+
+<<link [[游戏设置|Asylum Settings]]>><</link>>
+<br>
+<<link [[家|Bedroom]]>><<endcombat>><</link>>
+<br>

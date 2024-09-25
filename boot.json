@@ -1,0 +1,123 @@
+{
+  "name": "Whitney_Extra_Mod",
+  "version": "1.1.2",
+  "styleFileList": [],
+  "scriptFileList": [
+    "game/03-JavaScript/whitney_extra_mod_fn.js"
+  ],
+  "tweeFileList": [
+    "game/whitney_extra_mod_debug.twee",
+    "game/whitney_extra_mod_widgets.twee",
+    "game/overworld-town/whitney_extra_mod_park.twee",
+    "game/overworld-town/loc-school/whitney_extra_mod_schoolbullyoutside.twee",
+    "game/overworld-town/loc-school/whitney_extra_mod_roof.twee",
+    "game/overworld-forest/whitney_extra_mod_lake.twee"
+  ],
+  "imgFileList": [
+    "img/misc/icon/whitExtMod_lakeduck.png",
+    "img/misc/icon/whitExtMod_duck.png",
+    "img/misc/icon/whitExtMod_toast.png"
+  ],
+  "additionFile": [
+    "README.md"
+  ],
+  "addonPlugin": [
+    {
+      "modName": "ModLoader DoL ImageLoaderHook",
+      "addonName": "ImageLoaderAddon",
+      "modVersion": "^2.3.0",
+      "params": [
+      ]
+    },
+    {
+      "modName": "ReplacePatcher",
+      "addonName": "ReplacePatcherAddon",
+      "modVersion": "0.0.1",
+      "params": {
+        "js": [
+          {
+            "from": "text: V.whitney_text,",
+            "to": "text: V.whitney_text,\n\t\t\t\twhitExtMod_lake: V.whitextmod_lake,\n\t\t\t\twhitExtMod_duck: V.whitextmod_duck,\n\t\t\t\twhitExtMod_clothes: V.whitextmod_clothes,\n\t\t\t\twhitExtMod_feed: V.whitExtMod_feed,\n\t\t\t\twhitExtMod_exposed: V.whitExtMod_exposed,\n\t\t\t\twhitExtMod_leaveDirectly: V.whitExtMod_leaveDirectly,\n\t\t\t\twhitExtMod_parkSnowball: V.whitExtMod_parkSnowball,\n\t\t\t\twhitExtMod_parkChocolate: V.whitExtMod_parkChocolate,\n\t\t\t\twhitExtMod_schoolRoofGlide: V.whitExtMod_schoolRoofGlide,",
+            "fileName": "ingame.js"
+          },
+          {
+            "from": "widgets: [`<<set $molestationstart to 0>>`],",
+            "to": "widgets: [`<<set $molestationstart to 0>>`],}, {link: [`Whitney Extra Mod 测试`, `Whitney Extra Mod Test`], widgets: [``],},",
+            "fileName": "debug-menu.js"
+          }
+        ]
+      }
+    },
+    {
+      "modName": "TweeReplacer",
+      "addonName": "TweeReplacerAddon",
+      "modVersion": "1.0.0",
+      "params": [
+        {
+          "passage": "Widgets VersionCheck",
+          "findString": "<<run zoom($options.zoom)>>",
+          "replace": "<<run zoom($options.zoom)>>\n\t<<whitExtMod_init>>"
+        },
+        {
+          "passage": "Widgets Settings",
+          "findString": "<<set $tending_yield_factor to 5>>",
+          "replace": "<<set $tending_yield_factor to 5>>\n\t<<whitExtMod_init>>\n\t"
+        },
+        {
+          "passage": "Widgets variablesVersionUpdate",
+          "findString": "<<if $waspdisable is undefined>>",
+          "replace": "<<whitExtMod_init>>\n\t<<if $waspdisable is undefined>>"
+        },
+        {
+          "passage": "Widgets Settings",
+          "findString": "<<if $NPCName[_npcId].nam is \"Black Wolf\">>\n\t\t\t<div class=\"settingsToggleItemWide\">",
+          "replace": "<<whitExtMod_options>>\n\n\t\t<<if $NPCName[_npcId].nam is \"Black Wolf\">>\n\t\t\t<div class=\"settingsToggleItemWide\">"
+        },
+        {
+          "passage": "Lake Shore",
+          "findString": "<<if Time.hour gte 18 and $halloween is 1 and Time.monthDay is 31 and $halloween_lake is 1>>",
+          "replace": "<<whitExtMod_lake>>\n\n\t\t<<if Time.hour gte 18 and $halloween is 1 and Time.monthDay is 31 and $halloween_lake is 1>>"
+        },
+        {
+          "passage": "Park",
+          "findString": "<<elseif ($danger gte (9900 - $allure) or $eventforced) and $eventskip is 0>>",
+          "replace": "<<elseif whitExtMod_parkSnowball()>><<whitExtMod_parkSnowball>>\n\t<<elseif ($danger gte (9900 - $allure) or $eventforced) and $eventskip is 0>>"
+        },
+        {
+          "passage": "Robin Chocolate Widgets",
+          "findString": "|Robin Chocolate Help]]>><<endevent>><<npcincr Robin love 1>><<npcincr Robin trauma -1>><<pass 30>><<clotheson>><</link>><<glove>><<lrtrauma>>",
+          "replace": "|Robin Chocolate Help]]>><<endevent>><<npcincr Robin love 1>><<npcincr Robin trauma -1>><<pass 30>><<clotheson>><</link>><<glove>><<lrtrauma>>\n\t\t<<whitExtMod_parkChocolate>>"
+        },
+        {
+          "passage": "Widgets School Events",
+          "findString": "<<addinlineevent \"whitney_roof_1\">>",
+          "replace": "<<whitExtMod_schoolRoofCumdump>><<addinlineevent \"whitney_roof_1\">>"
+        },
+        {
+          "passage": "School Roof",
+          "findString": "|Hallways]]>><<endevent>><<pass 1>><</link>>",
+          "replace": "|Hallways]]>><<endevent>><<pass 1>><</link>><<whitExtMod_schoolRoofGlide>>"
+        },
+        {
+          "passage": "",
+          "findString": "",
+          "replace": ""
+        }
+      ]
+    }
+  ],
+  "dependenceInfo": [
+    {
+      "modName": "TweeReplacer",
+      "version": "^1.0.0"
+    },
+    {
+      "modName": "ReplacePatcher",
+      "version": "^1.0.0"
+    },
+    {
+      "modName": "ModLoader DoL ImageLoaderHook",
+      "version": "^2.3.0"
+    }
+  ]
+}
