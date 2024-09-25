@@ -111,9 +111,11 @@
 
 /* 學校 - 天台 - 滑翔 */
 <<widget "whitExtMod_schoolRoofGlide">>
-	<<if $whitExtMod.schoolRoofGlideDisable is "f" and ($harpy gte 6 or $angel gte 6 or $demon gte 6 or $fallenangel gte 2)>>
+	<<if $whitExtMod.schoolRoofGlideDisable is "f" and ($daily.whitExtMod_schoolRoofGlide isnot true or (Time.hour lt 7 and Time.hour gt 16)) and ($harpy gte 6 or $angel gte 6 or $demon gte 6 or $fallenangel gte 2)>>
 		<br>
     	<<glideicon>><<link [[向下滑翔|Whitney Extra Mod School Roof Glide]]>><</link>><<flight_text>>
+	<<elseif $daily.whitExtMod_schoolRoofGlide is true>>
+		<span class="blue">你看到門衛時不時地往天台張望。避免引起注意，你今天最好不要再從天台跳下去了。</span>
 	<</if>>
 <</widget>>
 

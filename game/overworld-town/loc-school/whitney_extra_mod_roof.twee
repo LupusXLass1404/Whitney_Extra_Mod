@@ -1,15 +1,16 @@
 
 
 /* 滑翔 */
-:: Whitney Extra Mod School Roof Glide
+:: Whitney Extra Mod School Roof Glide Surprise Sex School Roof Glide
 <<effects>>
 
-<<if $daily.whitExtMod_schoolRoofGlide is true>> /* 預設 */
-    你踏上了天台的柵欄，張開翅膀跳了出去，讓風帶著你緩慢著陸。
-<<else>>
-    你展開翅膀踏上了天台的柵欄上。
+<<if Time.hour gte 7 and Time.hour lte 16>>
+    <<set $daily.whitExtMod_schoolRoofGlide is true>>
+
 
     <<addinlineevent "whitExtMod_school_roof_glide_with">>
+        <<set $whitExtMod.knowGlide is true>>
+
     <</addinlineevent>>
 
     <<if $schoolstate isnot "lunch">>
@@ -18,35 +19,84 @@
         <</addinlineevent>>
 
         <<addinlineevent "whitExtMod_school_roof_glide_surprise">>
-            你在空中看到了惠特尼在其中一顆樹下抽菸。
+            你從天台的柵欄上跳了下去，墜落了一小段距離。但你太晚張開了翅膀，差點直接摔到地上，還好風仍然抓住了你，雖然有點慌亂但最終還是平安著陸了。
+            <br><br>
+            你鬆了一口氣後，一抬起頭就發現惠特尼正靠在樹上，一臉震驚地看著你，手中的菸掉甚至掉到了地上。
+            <br><br>
+            「你從哪掉下來的？」他大步走了過來，皺著眉頭，看起來很困惑。他的手在你身上四處摸索，感覺像是在檢查你有沒有受傷，而不是在侵犯你。| + 性奮
+            <br><br>
+            你注意到了有好幾雙眼睛正在盯著你看，大概是被你跳下天台的大膽舉動吸引的人們。
+            <br><br>
+            「<<= $whitExtMod.knowGlide is true ? "這麼喜歡出風頭？是想吸引男孩們來注意你吧" : "你又做了什麼？總是引人注目的騷貨。">>。」他露出了一個邪惡的笑容，抓住你的頭髮，把你拉得更近，「不如給他們看一場真正的表演吧。」
+            <br><br>
 
-            當你落地時，惠特尼才發現你，他一臉震驚，手中的菸掉到了地上。
-
-            「你從哪掉下來的？」他大步走了過來，看起來很困惑。手摸了摸你，確認你沒事之後才離開你。
-
-            「我現在沒心情陪你，去別的地方玩吧。」他把你推開，靠著樹繼續抽菸。
-
-            你瞄準了一個無人的空地準備降落，但突然一個人影衝了出來，擋在了降落的路徑上。你來不及轉變方向，就這樣撲進了他的懷裡。
+            <<link [[邀請做愛|Whitney Extra Mod School Roof Glide Surprise Sex School Roof Glide Surprise Sex]]>><<set $phase2 to "sex">><</link>>
+            <br>
+            <<link [[跪下|Whitney Extra Mod School Roof Glide Surprise Sex School Roof Glide Surprise Sex]]>><<set $phase2 to "oral">><</link>>
+            <br>
+            <<link [[拒絕|Whitney Extra Mod School Roof Glide Surprise Sex School Roof Glide Surprise Refuse]]>><</link>>
+            <br>
         <</addinlineevent>>
 
         <<addinlineevent "whitExtMod_school_roof_glide_egg">>
 
+
         <</addinlineevent>>
     <</if>>
+<<else>>
+    你踏上了天台的柵欄，張開翅膀跳了出去，讓風帶著你緩慢著陸。
 <</if>>
 
 /* 一起滑翔 */
-:: Whitney Extra Mod School Roof Glide Whit
+:: Whitney Extra Mod School Roof Glide Surprise Sex School Roof Glide Whit
 
 /* 驚訝 */
-:: Whitney Extra Mod School Roof Glide Surprise
+:: Whitney Extra Mod School Roof Glide Surprise Sex School Roof Glide Surprise Sex
+<<effects>>
+
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<maninit>>
+    <<if $phase2 to "sex">>
+        <<= C.npc.Whitney.dom gte 10 ? "支配>10" : "支配<10">>
+    <<else>>
+        <<= C.npc.Whitney.dom gte 10 ? "支配>10" : "支配<10">>
+        <<npcoral>>
+    <</if>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+<<audience>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[继续|Whitney Extra Mod School Roof Glide Surprise Sex Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Whitney Extra Mod School Roof Glide Surprise Sex]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Whitney Extra Mod School Roof Glide Surprise Sex Finish
+<<effects>>
+
+<<if C.npc.Whitney.dom gte 10>>
+
+<<else>>
+
+<</if>>
 
 /* 生蛋 */
-:: Whitney Extra Mod School Roof Glide Egg
-
+:: Whitney Extra Mod School Roof Glide Surprise Sex School Roof Glide Egg
+<<effects>>
 
 /* 儲精罐 */
-:: Whitney Extra Mod School Roof Cumdump
-
+:: Whitney Extra Mod School Roof Glide Surprise Sex School Roof Cumdump
+<<effects>>
 
 
