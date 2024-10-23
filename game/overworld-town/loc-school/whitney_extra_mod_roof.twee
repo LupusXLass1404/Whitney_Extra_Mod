@@ -9,35 +9,38 @@
 
 
     <<addinlineevent "whitExtMod_school_roof_glide_with">>
-        <<set $whitExtMod.knowGlide is true>>
+
 
     <</addinlineevent>>
 
     <<if $schoolstate isnot "lunch">>
+        <!-- 撫摸 -->
         <<addinlineevent "whitExtMod_school_roof_glide_stroke">>
 
         <</addinlineevent>>
 
+        <!-- 驚訝 -->
         <<addinlineevent "whitExtMod_school_roof_glide_surprise">>
-            你從天台的柵欄上跳了下去，墜落了一小段距離。但你太晚張開了翅膀，差點直接摔到地上，還好風仍然抓住了你，雖然有點慌亂但最終還是平安著陸了。
+            你從天台的柵欄上跳了下去，墜落了一小段距離。你太晚張開翅膀，差點直接摔到地上，還好風仍然抓住了你，雖然有點慌亂但最終還是平安著陸了。
             <br><br>
             你鬆了一口氣後，一抬起頭就發現惠特尼正靠在樹上，一臉震驚地看著你，手中的菸掉甚至掉到了地上。
             <br><br>
-            「你從哪掉下來的？」他大步走了過來，皺著眉頭，看起來很困惑。他的手在你身上四處摸索，感覺像是在檢查你有沒有受傷，而不是在侵犯你。| + 性奮
+            「你從哪掉下來的？」他大步走了過來，皺著眉頭，看起來很困惑。他的手在你身上四處摸索，感覺像是在檢查你有沒有受傷，而不是在侵犯你。<<arousal 100>>
             <br><br>
-            你注意到了有好幾雙眼睛正在盯著你看，大概是被你跳下天台的大膽舉動吸引的人們。
+            確認你沒事後，他看起來鬆了一口氣，然後他注意到了有好幾雙眼睛正在盯著你看。或許是你跳下天台的舉動引起了一些騷亂。惠特尼的眼神閃爍著，「你又做了什麼？總是渴望吸引男孩們目光的蕩婦。」
             <br><br>
-            「<<= $whitExtMod.knowGlide is true ? "這麼喜歡出風頭？是想吸引男孩們來注意你吧" : "你又做了什麼？總是引人注目的騷貨。">>。」他露出了一個邪惡的笑容，抓住你的頭髮，把你拉得更近，「不如給他們看一場真正的表演吧。」
+            隨著人群聚集惠特尼嘴角的笑意逐漸加深，他抓住了你的頭髮，把你拉得更近，「與其耍那些小把戲，不如給他們看一場真正的表演。」
             <br><br>
 
-            <<link [[邀請做愛|Whitney Extra Mod School Roof Glide Surprise Sex School Roof Glide Surprise Sex]]>><<set $phase2 to "sex">><</link>>
+            <<link [[邀請做愛|Whitney Extra Mod School Roof Glide Surprise Sex]]>><<set $phase2 to "sex">><</link>>
             <br>
-            <<link [[跪下|Whitney Extra Mod School Roof Glide Surprise Sex School Roof Glide Surprise Sex]]>><<set $phase2 to "oral">><</link>>
+            <<link [[跪下|Whitney Extra Mod School Roof Glide Surprise Sex]]>><<set $phase2 to "oral">><</link>>
             <br>
-            <<link [[拒絕|Whitney Extra Mod School Roof Glide Surprise Sex School Roof Glide Surprise Refuse]]>><</link>>
+            <<link [[拒絕|Whitney Extra Mod School Roof Glide Surprise Reject]]>><</link>>
             <br>
         <</addinlineevent>>
 
+        <!-- 生蛋 -->
         <<addinlineevent "whitExtMod_school_roof_glide_egg">>
 
 
@@ -51,7 +54,30 @@
 :: Whitney Extra Mod School Roof Glide Surprise Sex School Roof Glide Whit
 
 /* 驚訝 */
-:: Whitney Extra Mod School Roof Glide Surprise Sex School Roof Glide Surprise Sex
+:: Whitney Extra Mod School Roof Glide Surprise Reject
+<<effects>>
+
+<<if C.npc.Whitney.dom gte 16>>
+    他皺起眉頭，抓著你頭髮的手握得更緊了，「賤人，你沒有拒絕的權利。」
+    <br><br>
+
+
+    <<exit>>
+<<elseif C.npc.Whitney.dom gte 8>>
+    惠特尼瞇起眼睛，不情願地放開了你，然後露出了邪惡的笑容，「但讓觀眾們空手而歸也不太好吧？」
+    <br><br>
+    他把你的褲子拉下並用力拉扯，將你絆倒，你的衣服被撕了開來。當你摔在地面時，他將你的內衣一起扯掉了。<<pain 4>><<stress 6>><<<gpain>><gstress>>
+    <br><br>
+    「這些就當補償我的東西吧。」他秤了秤他手上的衣物，然後故作好心地說：「我勸你最好趕快跑，他們可不像我這麼友善。」
+<<else>>
+    他看著周圍，猶豫了一下，最終放開了你，「好吧，這次算你欠我的。」
+    <br><br>
+    湊熱鬧的人們發現沒有好戲可看後，人群漸漸散去。
+<</if>>
+<br><br>
+
+
+:: Whitney Extra Mod School Roof Glide Surprise Sex
 <<effects>>
 
 <<if $sexstart is 1>>
@@ -85,11 +111,56 @@
 :: Whitney Extra Mod School Roof Glide Surprise Sex Finish
 <<effects>>
 
-<<if C.npc.Whitney.dom gte 10>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>><<npcincr Whitney lust -20>>
+
+    觀眾們不斷地拍著照片，將你們沐浴在閃光燈下，惠特尼滿意地笑了。<<status 5>><<gcool>>
+    <br><br>
+    他把你拉了起來，粗魯地壓上你的唇，「<<= C.npc.Whitney.dom gte 10 ? "現在大家都知道你是我的了" : "操，你真是個天生的騷貨">>。」
+    <br><br>
+    觀眾騷動著。惠特尼抓住了你的手腕，調侃道：「走吧，除非你想留下來服務這他們。」
+    <br><br>
+    他<<= C.npc.Whitney.dom gte 10 ? "用眼神警告了周圍的人" : "徑直走出了人群">>，拉著你離開。
+    <br><br>
+
+    <<if $exposed gte 1>>
+
+    <<else>>
+
+    <</if>>
+
+    <<if C.npc.Whitney.dom gte 10>>
+
+    <<else>>
+
+    <</if>>
+
+	<<clotheson>>
+	<<endcombat>>
+
+<<elseif $enemyhealth lte 0>>
+    你把他推了開來，你趁機逃跑，周圍的群眾自動讓出了一條路。
+
+    你直到躲進了走廊才敢停下來。
+
+    <<clotheson>>
+	<<endcombat>>
+
 
 <<else>>
+    「操。」他咒罵了一聲，不情願地離開了你身上，「好吧，但下次我就不會讓你輕易逃跑了。」
+
+    <<clotheson>>
+
+    你站了起來，當你準備離開時。惠特尼突然踹了一下你的屁股，你踉蹌地向前走了幾步，差點跌倒。
+
+    他跟旁觀的學生都笑了起來，「回頭見，蕩婦。」<<pain 4>><<stress 6>><<<gpain>><gstress>>
+
+	<<endcombat>>
 
 <</if>>
+
+
 
 /* 生蛋 */
 :: Whitney Extra Mod School Roof Glide Surprise Sex School Roof Glide Egg
