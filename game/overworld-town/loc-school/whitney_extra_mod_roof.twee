@@ -1,25 +1,29 @@
 
 
 /* 滑翔 */
-:: Whitney Extra Mod School Roof Glide Surprise Sex School Roof Glide
+:: WEM School Roof Glide
 <<effects>>
 
 <<if Time.hour gte 7 and Time.hour lte 16>>
     <<set $daily.whitExtMod_schoolRoofGlide is true>>
 
+    <<cleareventpool>>
 
+    <!-- 共乘 -->
     <<addinlineevent "whitExtMod_school_roof_glide_with">>
+        你站到了天台的護欄上，正準備展開翅膀跳下去，一隻手突然從背後攬住了你的腰，阻止了你的動作。
+        <br><br>
+        你轉過頭去，是惠特尼。他問：「你準備表演什麼特技嗎？」
+        <br><br>
 
-
+        <<link [[回答他|WEM School Roof Glide With Reply]]>><</link>>
+        <br>
+        <<link [[繼續滑翔|WEM School Roof Glide With Alone]]>><</link>>
+        <br>
     <</addinlineevent>>
 
     <<if $schoolstate isnot "lunch">>
-        <!-- 撫摸 -->
-        <<addinlineevent "whitExtMod_school_roof_glide_stroke">>
-
-        <</addinlineevent>>
-
-        <!-- 驚訝 -->
+        <!-- 驚喜 -->
         <<addinlineevent "whitExtMod_school_roof_glide_surprise">>
             你從天台的柵欄上跳了下去，墜落了一小段距離。你太晚張開翅膀，差點直接摔到地上，還好風仍然抓住了你，雖然有點慌亂但最終還是平安著陸了。
             <br><br>
@@ -32,12 +36,17 @@
             隨著人群聚集惠特尼嘴角的笑意逐漸加深，他抓住了你的頭髮，把你拉得更近，「與其耍那些小把戲，不如給他們看一場真正的表演。」
             <br><br>
 
-            <<link [[邀請做愛|Whitney Extra Mod School Roof Glide Surprise Sex]]>><<set $phase2 to "sex">><</link>>
+            <<link [[邀請做愛|WEM School Roof Glide Surprise Sex]]>><<set $sexstart to 1>><<set $phase2 to "sex">><</link>>
             <br>
-            <<link [[跪下|Whitney Extra Mod School Roof Glide Surprise Sex]]>><<set $phase2 to "oral">><</link>>
+            <<link [[跪下|WEM School Roof Glide Surprise Sex]]>><<set $sexstart to 1>><<set $phase2 to "oral">><</link>>
             <br>
-            <<link [[拒絕|Whitney Extra Mod School Roof Glide Surprise Reject]]>><</link>>
+            <<link [[拒絕|WEM School Roof Glide Surprise Reject]]>><</link>>
             <br>
+        <</addinlineevent>>
+
+        <!-- 撫摸 -->
+        <<addinlineevent "whitExtMod_school_roof_glide_stroke">>
+
         <</addinlineevent>>
 
         <!-- 生蛋 -->
@@ -45,23 +54,92 @@
 
 
         <</addinlineevent>>
+
+        <<runeventpool>>
     <</if>>
 <<else>>
     你踏上了天台的柵欄，張開翅膀跳了出去，讓風帶著你緩慢著陸。
 <</if>>
 
-/* 一起滑翔 */
-:: Whitney Extra Mod School Roof Glide Surprise Sex School Roof Glide Whit
+/* ============== 共乘 ============== */
+:: WEM School Roof Glide With Reply
+<<effects>>
 
-/* 驚訝 */
-:: Whitney Extra Mod School Roof Glide Surprise Reject
+<<if $speech_attitude is "meek">>
+    「我想從這裡飛下去。」你誠實地回答。
+<<elseif $speech_attitude is "bratty">>
+    「當然是從這裡飛下去。」你理所當然地說。
+<<else>>
+    「我要從這裡飛下去。」你回答道。
+<</if>>
+<br><br>
+惠特尼看起來有點驚訝，但還是放開了你並退後了一步，「開始你的表演吧。」
+<br><br>
+
+<<link [[繼續滑翔|WEM School Roof Glide With Alone]]>><</link>>
+<br>
+<<link [[邀請他一起|WEM School Roof Glide With Together]]>><</link>>
+<br>
+
+:: WEM School Roof Glide With Together
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+    「你想和我一起飛下去嗎？」你小心地詢問。
+<<elseif $speech_attitude is "bratty">>
+    「和我一飛起下去，敢嗎？」你挑釁地說。
+<<else>>
+    「我可以帶著你飛，如何？」你邀請他。
+<</if>>
+<br><br>
+<<if $whitneyromance is 1>> /* 恋人关係 */
+    惠特尼跨愣住了，但很快就反應過來：「好啊，讓我看看你想耍什麼把戲。」他過了欄杆，站在天台的邊緣。你從後面抱住了他，展開了 <<= $angel gte 6 ? "潔白的羽翼" : $fallenangel gte 2 ? "漆黑的殘翼" : $demon gte 6 ? "尖銳的膜翅" : $harpy gte 6 "堅韌的飛羽" : "翅膀">>。
+    <br><br>
+    他看了一眼你的翅膀，你感覺得到惠特尼有點緊張，他的聲音中透露出興奮感，「蕩婦，好了嗎？你要確定好你那雙破翅膀真的有用。」
+    <br><br>
+    你點點頭，翅膀最大程度地展開，你們跳了出去，翅膀乘著風帶將你們托起，滑翔在空中。
+    <br><br>
+    惠特尼從一開始的緊張逐漸變成不敢置信，他驚呼道：「操，你他媽怎麼做到的！」
+    <br><br>
+    天台不高，你們只在空中待了一會就接觸到地面了，最後你們降落在後操場上。你鬆開了抓住惠特尼的手，但他反而抓緊了你，把你拉進了一個熱烈的吻。<<arousal 600 >><<npcincr Whitney lust 5>><<garousal>><<glust>>
+    <br><br>
+    你聽到了他的朋友們在天台上歡呼鼓掌著，惠特尼放開了你，得意地對著天台上的人炫耀著。<<status 5>><<npcincr Whitney dom 1>><<gcool>><<gdom>>
+    <br><br>
+    「太他媽的刺激了，」惠特尼興奮地說著，撩起了他的瀏海。他轉過頭看著你，帶著愉快的笑容，「下次記得再帶我玩一次。」<<npcincr Whitney love 1>><<glove>>
+<<else>> /* 非恋人关係 */
+    他愣了一下，然後露出了冷笑，「開什麼玩笑，難道你怕了？」
+    <br><br>
+    你還沒來得及回答，他就突然用力推了你一下，你被推下了天台，還好你即時展開翅膀才沒有摔到地上。
+    <br><br>
+    你平安落地後聽到天台上傳來了他們的笑聲。<<stress 6>><<trauma 6>><<gstress>><<gtrauma>>
+<</if>>
+<br><br>
+
+<<link [[繼續|School Rear Courtyard]]>><<endevent>><<set $eventskip to 1>><</link>>
+<br>
+
+:: WEM School Roof Glide With Alone
+<<effects>>
+
+你直接跳出了天台，早已張開的翅膀被風托起，帶著你在空中滑翔。
+<br><br>
+你聽到身後傳出了吵鬧聲跟歡呼聲，惠特尼和他的朋友都扶著欄杆在看著你，他們看起來很驚訝。<<status 5>><<gcool>>
+<br><br>
+你的高度緩慢下降，最後輕輕地落在了草地上。
+<br><br>
+
+<<link [[繼續|School Rear Courtyard]]>><<endevent>><<set $eventskip to 1>><</link>>
+<br>
+
+/* ============== 驚訝 ============== */
+:: WEM School Roof Glide Surprise Reject
 <<effects>>
 
 <<if C.npc.Whitney.dom gte 16>>
     他皺起眉頭，抓著你頭髮的手握得更緊了，「賤人，你沒有拒絕的權利。」
     <br><br>
 
-
+    <<link [[繼續|WEM School Roof Glide Surprise Sex]]>><<set $molestationstart to 1>><<set $phase2 to "rape">><</link>>
     <<exit>>
 <<elseif C.npc.Whitney.dom gte 8>>
     惠特尼瞇起眼睛，不情願地放開了你，然後露出了邪惡的笑容，「但讓觀眾們空手而歸也不太好吧？」
@@ -76,26 +154,38 @@
 <</if>>
 <br><br>
 
+:: WEM School Roof Glide Surprise Sex
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
 
-:: Whitney Extra Mod School Roof Glide Surprise Sex
-<<effects>>
+	<<maninit>>
+    他扯著你的頭髮，強迫你跪下。<<pain 4>><<gpain>><<npcoral>>
+	<br><br>
+	<<enable_rescue>>
+<</if>>
 
 <<if $sexstart is 1>>
 	<<set $sexstart to 0>>
 	<<consensual>>
 	<<set $consensual to 1>>
 	<<neutral 1>>
-	<<maninit>>
-    <<if $phase2 to "sex">>
-        <<= C.npc.Whitney.dom gte 10 ? "支配>10" : "支配<10">>
+
+	<<maninit>><<set $position to "missionary">>
+    <<if $phase2 is "sex">>
+        「我就喜歡像你這樣的騷貨。」他把你推倒在草地上，扯著下了你的衣服。<<clothesstrip>><<npc_attempt_sex>>
     <<else>>
-        <<= C.npc.Whitney.dom gte 10 ? "支配>10" : "支配<10">>
-        <<npcoral>>
+        你在了草地上跪了下來，他放鬆了抓著你頭髮的手。<<npcoral>>
     <</if>>
+    <br><br>
 <</if>>
 
 <<effects>>
 <<effectsman>>
+<<alarmstate>>
 <<man>>
 <<audience>>
 <<stateman>>
@@ -103,71 +193,113 @@
 <<actionsman>>
 
 <<if _combatend>>
-	<span id="next"><<link [[继续|Whitney Extra Mod School Roof Glide Surprise Sex Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[继续|WEM School Roof Glide Surprise Sex Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[继续|Whitney Extra Mod School Roof Glide Surprise Sex]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[继续|WEM School Roof Glide Surprise Sex]]>><</link>></span><<nexttext>>
 <</if>>
 
-:: Whitney Extra Mod School Roof Glide Surprise Sex Finish
+:: WEM School Roof Glide Surprise Sex Finish
 <<effects>>
 
 <<if $enemyarousal gte $enemyarousalmax>>
-	<<ejaculation>><<npcincr Whitney lust -20>>
+	<<ejaculation>>
 
-    觀眾們不斷地拍著照片，將你們沐浴在閃光燈下，惠特尼滿意地笑了。<<status 5>><<gcool>>
-    <br><br>
-    他把你拉了起來，粗魯地壓上你的唇，「<<= C.npc.Whitney.dom gte 10 ? "現在大家都知道你是我的了" : "操，你真是個天生的騷貨">>。」
-    <br><br>
-    觀眾騷動著。惠特尼抓住了你的手腕，調侃道：「走吧，除非你想留下來服務這他們。」
-    <br><br>
-    他<<= C.npc.Whitney.dom gte 10 ? "用眼神警告了周圍的人" : "徑直走出了人群">>，拉著你離開。
-    <br><br>
-
-    <<if $exposed gte 1>>
-
+    <<set $phase2 is "rape">>
+        他緊緊壓著你的頭，幾乎讓你無法呼吸。直到你會喘不過氣來才放過你，你跪倒在地上喘氣。
+        <br><br>
+        他整理好衣服並掏出了一支菸，慢悠悠地說，「我勸你最好趕快跑，他們可不像我這麼友善。」
+        <br><br>
+        <<tearful>>，你抓緊你的衣服，逃到了安全的地方。
     <<else>>
+        觀眾們不斷地拍著照片，將你們沐浴在閃光燈下，惠特尼滿意地笑了。<<status 5>><<gcool>>
+        <br><br>
+        他把你拉了起來，粗魯地壓上你的唇，「<<= C.npc.Whitney.dom gte 10 ? "現在大家都知道你是我的了" : "操，你真是個天生的騷貨">>。」
+        <br><br>
+        <<clotheson>>
+        <<endcombat>>
 
+        觀眾騷動著。惠特尼抓住了你的手腕，調侃道：「走吧，除非你想留下來服務這他們。」
+        <br><br>
+        他<<= C.npc.Whitney.dom gte 10 ? "用眼神警告了周圍的人" : "徑直走出了人群">>，拉著你離開。
+        <br><br>
+        惠特尼走進了學校走廊後，才
+        <<if $exposed gte 1>>
+            注意到了你暴露的身體，他的嘴角勾起了一個笑容。
+            <<if C.npc.Whitney.dom gte 10>>
+                「總是穿著一扯就破的衣服，<<= $fame.exhibitionism gte 600 ? "我猜你的傳聞就是這麼來的" : "很快大家都會知道你的小癖好了">>。」<<npcincr Whitney lust 5>><<glust>>
+                <br><br>
+                惠特尼把你拖進了更衣室，拿了條毛巾纏在你身上。「當我的蕩婦得小心點，別被其他人的髒手碰了。」他拉住了你的頭髮，你們的臉離得很近，他溫熱的氣息噴在你的臉上，「如果被我發現了，你們都會完蛋。」<<stress 6>><<gstress>><<towelup>>
+                <br><br>
+                你被他推開，看著他離開了更衣室。
+            <<else>>
+                「你這麼裸著也很好，<<= $fame.exhibitionism gte 600 ? "你不是很習慣這麼做嗎？" : "我期待隔天能聽到暴露狂的傳聞。">>」
+                <br><br>
+                「女孩，別讓我失望了。」惠特尼離開之前，給了你一個暗示性的眼神。<<npcincr Whitney lust 5>><<glust>>
+                <br><br>
+                你發現更衣室就在旁邊，你趕緊躲了進去。
+            <</if>>
+            <br><br>
+
+            <<link [[繼續|School Pool Entrance]]>><<endevent>><<set $eventskip to 1>><</link>>
+            <br>
+        <<else>>
+            放開了你，拿出了一根煙，刁在嘴裡。你正準備離開時，他突然叫住了你，「下次記得讓我親眼看看你玩的把戲。」
+            <br><br>
+            他拿出了打火機，轉身拐進了另一個走廊。
+            <br><br>
+
+            <<link [[繼續|Hallways]]>><<endevent>><<set $eventskip to 1>><</link>>
+            <br>
+        <</if>>
+        <<exit>>
     <</if>>
-
-    <<if C.npc.Whitney.dom gte 10>>
-
-    <<else>>
-
-    <</if>>
-
-	<<clotheson>>
-	<<endcombat>>
-
 <<elseif $enemyhealth lte 0>>
-    你把他推了開來，你趁機逃跑，周圍的群眾自動讓出了一條路。
-
-    你直到躲進了走廊才敢停下來。
-
-    <<clotheson>>
-	<<endcombat>>
-
-
+    你把他推了開來，周圍的群眾驚訝地讓出了一條路，讓你離開。
+    <br><br>
+    <<tearful>>，你躲進了走廊。
+<<elseif $alarm is 1 and $rescue is 1>>
+    「那裡在做什麼！」多倫喊道，邊往人群這邊跑過來。
+    <br><br>
+    「操。」惠特尼咒罵了一聲，把你推開，迅速整理好衣服後就跑走了，圍觀的人群也一哄而散。
+    <br><br>
+    <<tearful>>，你爬了起來，朝安全的地方跑去。
 <<else>>
-    「操。」他咒罵了一聲，不情願地離開了你身上，「好吧，但下次我就不會讓你輕易逃跑了。」
-
+    他不情願地離開了你身上，「好吧，但下次我就不會讓你輕易逃跑了。」
+    <br><br>
     <<clotheson>>
-
+    <br><br>
     你站了起來，當你準備離開時。惠特尼突然踹了一下你的屁股，你踉蹌地向前走了幾步，差點跌倒。
+    <br><br>
+    他跟旁觀的學生都笑了起來，「回頭見，蕩婦。」<<stress 6>><<pain 4>><<gstress>><<gpain>>
+    <br><br>
+    <<endcombat>>
 
-    他跟旁觀的學生都笑了起來，「回頭見，蕩婦。」<<pain 4>><<stress 6>><<<gpain>><gstress>>
-
-	<<endcombat>>
-
+    <<link [[繼續|School Rear Courtyard]]>><<endevent>><<set $eventskip to 1>><</link>>
+    <<exit>>
 <</if>>
+<br><br>
+
+<<clotheson>>
+<<endcombat>>
+
+<<link [[繼續|School Rear Courtyard]]>><<endevent>><<set $eventskip to 1>><</link>>
+<br>
+
+
+
+
+
+
+
 
 
 
 /* 生蛋 */
-:: Whitney Extra Mod School Roof Glide Surprise Sex School Roof Glide Egg
+:: WEM School Roof Glide Egg
 <<effects>>
 
 /* 儲精罐 */
-:: Whitney Extra Mod School Roof Glide Surprise Sex School Roof Cumdump
+:: WEM School Roof Cumdump
 <<effects>>
 
 
