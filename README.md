@@ -6,7 +6,6 @@
 - 模組非遊戲本體，如果要分享模組相關的截圖／內容，請務必補充說明是模組內容而非原版內容，避免造成不必要的誤會。
 - [模組文本整理（Google文件）](https://docs.google.com/document/d/1yQoYOq_Tn64dyLmVLmA3p115v8DQgRyX__M0dL0847I/edit?usp=sharing)：給不想下載模組，但是想看文本的人。
 - [Google表單](https://forms.gle/Ht3TkpVFPbZ4Wukp6)：Bug回報。（可以放存檔）
-- [匿名棉花糖](https://marshmallow-qa.com/gwe3jm6jmight0a)：寫什麼都可以。
 - [噗浪偷偷說](https://www.plurk.com/p/3fh7rpqv0i)：歡迎一起討論。
 
 ## 更新內容
@@ -22,3 +21,10 @@
 - v1.1.2（製作於DoL-0.5.1.3版本）
   - 修復Bug
     - 修復了湖邊餵鴨的問題。
+- v1.1.3（製作於DoL-0.5.5.9版本）
+  - 改進
+    - 現在出現血月時，惠特尼不會出現在河邊。
+  - 修復Bug
+    - 修復了湖邊餵鴨的icon。
+    - 先移除湖邊餵鴨時更換惠特尼衣服的功能。
+    - 修復了公園的丟雪球找不到正確更替位置的問題。
