@@ -1,8 +1,12 @@
+:: Whitney Extra Mod Roof Widgets [widget]
+<<widget "whitExtMod_schoolRoofGlideDefault">>
+    你踏上了天台的柵欄，張開翅膀跳了出去，讓風帶著你緩慢著陸。
+<</widget>>
 
-
-/* 滑翔 */
+/* ============================================ 滑翔 ============================================ */
 :: WEM School Roof Glide
 <<effects>>
+<<npc Whitney>><<person1>>
 
 <<if Time.hour gte 7 and Time.hour lte 16>>
     <<set $daily.whitExtMod_schoolRoofGlide is true>>
@@ -46,22 +50,30 @@
 
         <!-- 撫摸 -->
         <<addinlineevent "whitExtMod_school_roof_glide_stroke">>
+            <<whitExtMod_schoolRoofGlideDefault>>
 
+            <br><br>
+            <<link [[繼續|WEM School Roof Glide Stroke]]>><</link>>
+            <br>
         <</addinlineevent>>
 
         <!-- 生蛋 -->
-        <<addinlineevent "whitExtMod_school_roof_glide_egg">>
+        <<if $whitExtMod.foodInsertionDisable is "f" and ($analdisable is "f" or $player.vaginaExist)>>
+            <<addinlineevent "whitExtMod_school_roof_glide_egg">>
+                <<whitExtMod_schoolRoofGlideDefault>>
 
-
-        <</addinlineevent>>
-
+                <br><br>
+                <<link [[繼續|WEM School Roof Glide Egg]]>><</link>>
+                <br>
+            <</addinlineevent>>
+        <</if>>
         <<runeventpool>>
     <</if>>
 <<else>>
-    你踏上了天台的柵欄，張開翅膀跳了出去，讓風帶著你緩慢著陸。
+    <<whitExtMod_schoolRoofGlideDefault>>
 <</if>>
 
-/* ============== 共乘 ============== */
+/* ---------------------- 共乘 ---------------------- */
 :: WEM School Roof Glide With Reply
 <<effects>>
 
@@ -131,7 +143,7 @@
 <<link [[繼續|School Rear Courtyard]]>><<endevent>><<set $eventskip to 1>><</link>>
 <br>
 
-/* ============== 驚訝 ============== */
+/* ---------------------- 驚訝 ---------------------- */
 :: WEM School Roof Glide Surprise Reject
 <<effects>>
 
@@ -285,21 +297,246 @@
 <<link [[繼續|School Rear Courtyard]]>><<endevent>><<set $eventskip to 1>><</link>>
 <br>
 
+/* ---------------------- 撫摸 ---------------------- */
+:: WEM School Roof Glide Stroke
+<<effects>>
 
+「你怎麼做到的，吊鋼索嗎？」熟悉的聲音從身後傳來，是惠特尼。他的手毫不客氣地在你的翅膀上摸索。
+<br><br>
+<<if $speech_attitude is "meek">>
+    「不是，我是用翅膀飛下來的……」儘管你說的是實話，但仍然感到心虛。
+<<elseif $speech_attitude is "bratty">>
+    「才不是，你瞎了嗎？我身後有這麼大一對翅膀。」你理直氣壯地說，絲毫不覺得這有哪裡不合理。
+<<else>>
+    你猶豫了一下，說出了實話：「我是用這對翅膀飛下來的。」
+<</if>>
+<br><br>
+「少來了，肯定有機關。」他的手抓緊了你的<<= $demon gte 6 ? "翅膀" : "羽毛">>，讓你痛的叫出聲。<<pain 2>><<gpain>>
+<br><br>
+「你還挺入戲的嘛，喜歡裝小鳥？」他著放開了你，但手還繼續在你的翅膀上遊走，「怎麼可能找不到機關？」
+<br><br>
+他幾乎把你的翅膀都摸了個遍，當他的手移動到了背部與翅膀連接的位置時，你感覺汗毛豎起，他捏了一下，突然的刺激讓你叫了一聲。<<arousal 600 >><<garousal>>
+<br><br>
+「我是找到小鳥兒的G點了嗎？」他諷刺地說，然後像是忘了尋找機關，轉而用各種力道揉捏著那個位置，你在他的刺激下扭動著身體。<<arousal 1200>><<ggarousal>>
+<br><br>
+<<if $arousal lt $arousalmax>>
+    「看在你演的挺逼真的份上，今天就放過你。」他笑著把你推開。<<npcincr Whitney lust 5>><<glust>>
+<<else>>
+    <<orgasm>>
 
+    「你剛剛剛是高潮了嗎？」他露出了驚訝的神情，嘲笑著：「也只有你這麼騷的蕩婦能演到這種地步了。」 <<npcincr Whitney love 1>><<npcincr Whitney lust 10>><<glove>><<gglust>>
+    <br><br>
+    他用手<<= $demon gte 6 ? "拍了拍你的翅膀" : "順了順你的羽毛">>。「我玩夠了，今天就放過你。」
+    <br><br>
+    他在離開之前故意拉了一下你的翅膀。
+<</if>>
+<br><br>
 
+<<link [[繼續|School Rear Courtyard]]>><<endevent>><<set $eventskip to 1>><</link>>
+<br>
 
-
-
-
-
-
-/* 生蛋 */
+/* ---------------------- 生蛋 ---------------------- */
 :: WEM School Roof Glide Egg
 <<effects>>
 
-/* 儲精罐 */
+當你準備降落在地面時，你的腳踝突然被抓住了，你瞬間失去了平衡，跌倒在在柔軟的草坪上。<<pain 4>><<gpain>>
+<br><br>
+你抬頭尋找兇手，看到惠特尼正得意的笑著，「抓到了一隻小小鳥。」
+<br><br>
+他的眼中閃爍著邪惡的光芒，壓到了你身上。
+<br><br>
+「你們有看過小鳥生蛋嗎？」惠特尼轉頭看向了他的朋友，最後把視線移回了你身上。你才發現你他手裡握著一顆純白色的雞蛋。
+<br><br>
+
+<<link [[順其自然|WEM School Roof Glide Egg 2]]>><<stress 6>><<trauma 6>><<npcincr Whitney dom 1>><</link>><<gstress>><<gtrauma>><<gdom>>
+<br>
+<<link [[拒絕|WEM School Roof Glide Egg Fight]]>><<set $fightstart to 1><<npcincr Whitney dom -1>>><</link>><<ldom>>
+<br>
+
+:: WEM School Roof Glide Egg 2
+<<effects>>
+
+他扯下了你的褲子，把蛋按在你的<<= $player.vaginaExist ? "小穴" : "屁股">>上，慢慢地將雞蛋推了進去。你的身體下意識縮緊了肌肉，想將異物排出，但惠特尼的手指還在你的體內，不停的把蛋推入到更深的地方。
+<br><br>
+他另一隻手空著的手，<<= $player.vaginaExist and $player.penisExist ? "撫過你的陰唇之後，握住了你的陰莖" : $player.vaginaExist ? "撫過你的陰唇之後，按住了你的陰蒂" : "揉捏了一下你的睪丸，然後握住了你的陰莖">>。
+<br><br>
+他的手指<<= $player.vaginaExist ? "抽插著你的小穴" : "壓著你著你的前列腺">>，同時<<= $player.penisExist ? "撫摸著你的陰莖" : "按壓著你的陰蒂">>。兩個敏感點被刺激讓你忍不住呻吟，他的朋友看上去也很興奮，拿著手機不停地拍照。
+<br><br>
+當你的身體顫抖起來，即將高潮時，他提前將在你體內的手指抽出，然後給了你的<<= $player.penisExist ? "陰莖" : "陰蒂">>最後的刺激。他後退了幾步，欣賞著你激烈的高潮，伴隨著高潮的肌肉的緊繃，將蛋噴出了你的體外，你躺在草地上氣喘吁吁。
+<br><br>
+「很精彩的表演。」惠特尼看上去很滿意，和朋友們笑著離開了。
+<br><br>
+<<tearful>>你獨自坐在地上喘氣。<<set $whitExtMod.glideEgg to true>>
+<br><br>
+
+<<link [[繼續|School Rear Courtyard]]>><<endevent>><<set $eventskip to 1>><</link>>
+<br>
+
+:: WEM School Roof Glide Egg Fight
+<<if $fightstart is 1>>
+	<<set $fightstart to 0>>
+	<<neutral 1>>
+	<<maninit>>
+	<<set $enemytrust -= 100>>
+	<<set $enemyanger += 200>>
+	<<npcidlegenitals>>
+    你害怕接下來發生的事情，開始掙扎，翅膀用力地煽動起來。他壓住了你，「到我手裡就別想再飛了。」
+    <br><br>
+    <<enable_rescue>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<alarmstate>>
+<<man>>
+<<audience>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[Next|WEM School Roof Glide Egg Fight Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[Next|WEM School Roof Glide Egg Fight]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: WEM School Roof Glide Egg Fight Finish
+<<effects>>
+
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation "short">>
+
+    他抓著你翅膀的手放鬆了，滾到了一旁的草地上喘氣，「這次就放過你，下次就別想溜了。」<<npcincr Whitney lust -20>><<llust>>
+    <br><br>
+    <<tearful>>你抓緊衣服跑了。
+<<elseif $enemyhealth lte 0>>
+    你把他推開，他滾到了一旁的草地上。
+    <br><br>
+    <<tearful>>你在他爬起來之前逃跑了。
+<<elseif $alarm is 1 and $rescue is 1>>
+    「那裡在做什麼！」多倫喊道，邊往這邊跑了過來。
+    <br><br>
+    「該死，」惠特尼咒罵了一聲，「這次先放過你。」他跟著他的朋友一起逃跑了。
+    <br><br>
+    <<tearful>>你爬了起來，朝安全的地方跑去。
+<<else>>
+    你倒在草地上，傷痕累累無法動彈。
+    <br><br>
+	<<clotheson>>
+	<<endcombat>>
+
+	<<npc Whitney>><<person1>>
+
+    <<link [[繼續|WEM School Roof Glide Egg 2]]>><</link>>
+    <<exit>>
+<</if>>
+<br><br>
+<<clotheson>>
+<<endcombat>>
+
+<<link [[繼續|School Rear Courtyard]]>><<endevent>><<set $eventskip to 1>><</link>>
+<br>
+
+/* ============================================ 儲精罐 ============================================ */
 :: WEM School Roof Cumdump
 <<effects>>
+
+<<if $phase is 0>> /* 逃跑 */
+    你感覺到了危險，迅速跑下了樓梯。你回頭望去，沒有人追上來。
+    <br><br>
+
+    <<link [[繼續|Hallways]]>><<endevent>><<set $eventskip to 1>><</link>>
+    <br>
+<<else>> /* 站在原地 */
+    「蕩婦，我幫你準備了『特別』的午餐。」惠特尼抓住了你的手腕，把你拖了過去。他的語氣帶著興奮：「你一定會喜歡的。」
+    <br><br>
+    他拉著你坐下，然後對著他的朋友比了個手勢。
+    <br><br>
+    一個男孩（簡單）拿了一個杯子出來，放在地板上。當你感到困惑時，就看到了有三個男孩圍著杯子，開始撫摸他們的陰莖。
+    <br><br>
+    他的手攬著你的肩膀，露出了惡劣的笑容並在耳邊低語：「期待嗎？」
+    <br><br>
+    你看著眼前的場景感到不安。<<stress 6>><<gstress>>
+
+    <<link [[等待|WEM School Roof Cumdump 2]]>><</link>>
+    <br>
+    <<link [[逃跑|WEM School Roof Cumdump Fight]]>><<set $fightstart to 1>><</link>>
+    <br>
+<</if>>
+
+:: WEM School Roof Cumdump 2
+<<effects>>
+
+
+
+
+
+:: WEM School Roof Cumdump Fight
+<<if $fightstart is 1>>
+	<<set $fightstart to 0>>
+	<<neutral 1>>
+	<<maninit>>
+	<<set $enemytrust -= 100>>
+	<<set $enemyanger += 200>>
+	<<npcidlegenitals>>
+    惠特尼抓住你了的腳踝。「餐點還沒準備好呢，這麼急著走？」他的手握得很緊。<<pain 2>><<gpain>>
+    <br><br>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+<<audience>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[继续|WEM School Roof Cumdump Fight Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|WEM School Roof Cumdump Fight]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: WEM School Roof Cumdump Fight Finish
+<<effects>>
+
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation "short">>
+
+	<<tearful>>
+
+	<<clotheson>>
+	<<endcombat>>
+
+<<elseif $enemyhealth lte 0>>
+
+	<<tearful>>
+
+	<<clotheson>>
+	<<endcombat>>
+
+<<else>>
+
+	<<tearful>>
+
+	<<clotheson>>
+	<<endcombat>>
+
+<</if>>
+<br><br>
+
+<<link [[继续|]]>><<endevent>><<set $eventskip to 1>><</link>>
+
+
+
+
+
+
+
+
+
+
+
+
 
 

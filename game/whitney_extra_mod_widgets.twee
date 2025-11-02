@@ -41,7 +41,7 @@
 			<span class="gold">Whitney Extra Mod 性癖設置：</span>
 			<br>
 			<label>
-		        <<checkbox "$whitExtMod.foodInsertionDisable" "t" "f" autocheck>> <mouse class = "tooltip"> 啟用食物插入<span>用食物插入小穴或肛門，但不包括強制餵食。</span></mouse>
+		        <<checkbox "$whitExtMod.foodInsertionDisable" "f" "t" autocheck>> <mouse class = "tooltip"> 啟用食物插入<span>用食物插入小穴或肛門。</span></mouse>
 		    </label>
 		</div>
 
@@ -58,7 +58,10 @@
 
 <</widget>>
 
-/* 湖泊 - 餵鴨子 */
+
+
+/* ============================================ 事件 ============================================ */
+/* ---------------------- 湖泊 - 餵鴨子 ---------------------- */
 <<widget "whitExtMod_lake">>
 	<<if whitExtMod_isInLakeDuck()>>
 		<<if $daily.whitney.whitExtMod_lake gte 1>>
@@ -89,7 +92,7 @@
 	<<set $daily.whitney.whitExtMod_lake to 0>>
 <</widget>>
 
-/* 公園 - 熱巧克力 */
+/* ---------------------- 公園 - 熱巧克力---------------------- */
 <<widget "whitExtMod_parkChocolate">>
     <<if isInPark("whitney") and $whitneyromance is 1 and $daily.whitney.whitExtMod_parkChocolate is undefined and $whitExtMod.parkChocolateDisable is "f">>
         <br>
@@ -97,7 +100,7 @@
 	<</if>>
 <</widget>>
 
-/* 公園 - 雪球 */
+/* ---------------------- 公園 - 雪球 ---------------------- */
 <<widget "whitExtMod_parkSnowball">>
     <<set $daily.whitney.whitExtMod_parkSnowball to 1>>
     <<npc Whitney>><<person1>>
@@ -109,7 +112,7 @@
     <<link [[无视|Whitney Extra Mod Park Snowball]]>><<set $phase to 0>><</link>>
 <</widget>>
 
-/* 學校 - 天台 - 滑翔 */
+/* ---------------------- 學校 - 天台 - 滑翔 ---------------------- */
 <<widget "whitExtMod_schoolRoofGlide">>
 	<<if $whitExtMod.schoolRoofGlideDisable is "f" and ($daily.whitExtMod_schoolRoofGlide isnot true or (Time.hour lt 7 and Time.hour gt 16)) and ($harpy gte 6 or $angel gte 6 or $demon gte 6 or $fallenangel gte 2)>>
 		<br>
@@ -119,7 +122,7 @@
 	<</if>>
 <</widget>>
 
-/* 學校 - 天台 - 儲精罐 */
+/* ---------------------- 學校 - 天台 - 儲精罐 ---------------------- */
 <<widget "whitExtMod_schoolRoofCumdump">>
 	<<if $whitExtMod.schoolRoofCumdumpDisable is "f" and maleChance() lte random(1,100)>>
 		<<addinlineevent "whitExtMod_roof_cumdump">>
@@ -128,16 +131,17 @@
 			接著，惠特尼站起身，走了過來。
 			<br><br>
 
-			<<link [[逃跑|Whitney Extra Mod School Roof Cumdump]]>><</link>>
+			<<link [[逃跑|WEM School Roof Cumdump]]>><<set $phase to 0>><</link>>
 			<br>
-			<<link [[站在原地|Whitney Extra Mod School Roof Cumdump]]>><</link>>
+			<<link [[站在原地|WEM School Roof Cumdump]]>><<set $phase to 1>><</link>>
 			<br>
 		<</addinlineevent>>
 	<</if>>
 <</widget>>
 
 
-/* icon */
+
+/* ============================================ icon ============================================ */
 	/* 湖泊 - 餵鴨子 */
 <<widget "whitExtMod_lakeduckicon">>
 	<<icon "whitExtMod_lakeduck.png">>

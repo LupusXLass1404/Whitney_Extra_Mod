@@ -26,8 +26,7 @@
       "modName": "ModLoader DoL ImageLoaderHook",
       "addonName": "ImageLoaderAddon",
       "modVersion": "^2.3.0",
-      "params": [
-      ]
+      "params": []
     },
     {
       "modName": "ReplacePatcher",
@@ -90,8 +89,8 @@
         },
         {
           "passage": "Widgets School Events",
-          "findString": "<<addinlineevent \"whitney_roof_1\">>",
-          "replace": "<<whitExtMod_schoolRoofCumdump>><<addinlineevent \"whitney_roof_1\">>"
+          "findString": "<<addinlineevent \"whitney_roof_3\">>",
+          "replace": "<<whitExtMod_schoolRoofCumdump>><<addinlineevent \"whitney_roof_3\">>"
         },
         {
           "passage": "School Roof",
