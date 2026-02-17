@@ -17,6 +17,7 @@
     <<link [[丢雪球|WhitExtMod Park Snowball]]>><<set $phase to 1>><</link>><<skill_difficulty `currentSkillValue("handskill")` "手部技巧" 1 800>>
     <br>
     <<link [[无视|WhitExtMod Park Snowball]]>><<set $phase to 0>><</link>>
+    <br>
 <</widget>>
 
 
