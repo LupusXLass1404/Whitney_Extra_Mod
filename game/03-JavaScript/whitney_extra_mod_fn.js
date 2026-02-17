@@ -10,7 +10,8 @@ function whitExtMod_isInLakeDuck() {
         && !Weather.bloodMoon //不是血月
         && V.halloween !== 1 //不是萬聖節
         && V.pillory.tenant.special.name !== "Whitney" //惠特尼不在頸手枷
-        && V.daily.whitney.whitExtMod_lake !== 0;
+        && V.daily.whitney.whitExtMod_lake !== 0
+        && V.whitExtMod.lakeDuckDisable == "f";
 } window.whitExtMod_isInLakeDuck = whitExtMod_isInLakeDuck;
 
 function whitExtMod_parkSnowball() {
@@ -18,7 +19,8 @@ function whitExtMod_parkSnowball() {
         && Weather.isSnow //有積雪
         && Weather.precipitation == "snow" //下雪
         && V.rng < 5
-        && V.daily.whitney.whitExtMod_parkSnowball == undefined;
+        && V.daily.whitney.whitExtMod_parkSnowball == undefined
+        && V.whitExtMod.parkSnowballDisable == "f";
 } window.whitExtMod_parkSnowball = whitExtMod_parkSnowball;
 
 
