@@ -1,5 +1,5 @@
 /* 热巧克力 */
-:: Whitney Extra Mod Park Robin Chocolate
+:: WhitExtMod Park Robin Chocolate
     <<effects>>
 
     <<npc Whitney>><<person1>>
@@ -22,10 +22,10 @@
     <</if>>
     <br><br>
 
-    <<link [[继续|Whitney Extra Mod Park Chocolate]]>><</link>>
+    <<link [[继续|WhitExtMod Park Chocolate]]>><</link>>
 
 
-:: Whitney Extra Mod Park Chocolate
+:: WhitExtMod Park Chocolate
     <<effects>>
 
     你手上拿着还冒着白烟的热巧克力，走到了惠特尼旁边<<if playerBellyVisible()>>，当<<he>>看到你靠近时，把嘴裡的菸拿掉了<</if>>。<<he>>注意到了你手上拿着的东西。
@@ -33,13 +33,13 @@
     你将热巧克力递给<<he>>，“要喝一口吗？”
     <br><br>
 
-    <<link [[把热巧克力给惠特尼|Whitney Extra Mod Park Chocolate 2]]>><<set $phase to 0>><</link>>
+    <<link [[把热巧克力给惠特尼|WhitExtMod Park Chocolate 2]]>><<set $phase to 0>><</link>>
     <br>
-    <<link [[含一口到嘴裡|Whitney Extra Mod Park Chocolate 2]]>><<set $phase to 1>><</link>>
+    <<link [[含一口到嘴裡|WhitExtMod Park Chocolate 2]]>><<set $phase to 1>><</link>>
     <br>
-    <<link [[自己喝|Whitney Extra Mod Park Chocolate 2]]>><<set $phase to 2>><</link>>
+    <<link [[自己喝|WhitExtMod Park Chocolate 2]]>><<set $phase to 2>><</link>>
 
-:: Whitney Extra Mod Park Chocolate 2
+:: WhitExtMod Park Chocolate 2
     <<effects>>
 
     <<if $phase is 0>> /* 把热巧克力给惠特尼 */
@@ -82,13 +82,13 @@
         “当做补偿，我请你一杯。然后做个好<<girlfriend>>，顺便帮我买一杯。”<<he>>拍了拍你的头，走回了树下从口袋裡掏出一支菸，但只是叼在嘴中，没有点燃。
         <br><br>
 
-        <<link [[买热巧克力 (£4)|Whitney Extra Mod Park Chocolate 3]]>><<set $phase to 1>><<set $money -= 400>><</link>>
+        <<link [[买热巧克力 (£4)|WhitExtMod Park Chocolate 3]]>><<set $phase to 1>><<set $money -= 400>><</link>>
         <br>
-        <<link [[直接离开|Whitney Extra Mod Park Chocolate 3]]>><<set $phase to 0>><</link>>
+        <<link [[直接离开|WhitExtMod Park Chocolate 3]]>><<set $phase to 0>><</link>>
 
     <</if>>
 
-:: Whitney Extra Mod Park Chocolate 3
+:: WhitExtMod Park Chocolate 3
     <<effects>>
 
     <<if $phase is 0>> /* 直接离开 */
@@ -111,7 +111,7 @@
     <<link [[继续|Park]]>><<endevent>><<set $eventskip to 1>><</link>>
 
 /* 雪球 */
-:: Whitney Extra Mod Park Snowball
+:: WhitExtMod Park Snowball
     <<effects>>
 
     <<if $phase is 0>> /* 无视 */
@@ -128,9 +128,9 @@
 
             <br><br>
 
-            <<link [[待在原地|Whitney Extra Mod Park Snowball 2]]>><<set $phase to 1>><</link>>
+            <<link [[待在原地|WhitExtMod Park Snowball 2]]>><<set $phase to 1>><</link>>
             <br>
-            <<link [[逃跑|Whitney Extra Mod Park Snowball 2]]>><<set $phase to 0>><</link>>
+            <<link [[逃跑|WhitExtMod Park Snowball 2]]>><<set $phase to 0>><</link>>
 
         <<else>> /* 手部技巧判定失败 */
             <span class="red">但你丢歪了，雪球从<<he>>的头顶上飞过。</span><<he>>马上蹲下捏起了一颗雪球，雪球朝你飞了过来，击中了你的脸，你失去平衡滑倒在冰面上。<<pain 4>><<gpain>>
@@ -156,7 +156,7 @@
         <</if>>
     <</if>>
 
-:: Whitney Extra Mod Park Snowball 2
+:: WhitExtMod Park Snowball 2
     <<effects>>
 
     <<if $phase is 0>> /* 逃跑 */
@@ -170,11 +170,11 @@
             <<he>>把你推倒在雪地上，身体压在了你身上，<<he>>突然吻住了你，同时你感觉到<<he>>的下体在蹭着你。<<arousal 200>><<garousal>>
             <br><br>
 
-            <<link [["磨蹭" + $NPCList[0].pronouns.him|Whitney Extra Mod Park Snowball 3]]>><<set $phase to 0>><<npcincr Whitney love 1>><</link>><<promiscuous1>><<glove>>
+            <<link [["磨蹭" + $NPCList[0].pronouns.him|WhitExtMod Park Snowball 3]]>><<set $phase to 0>><<npcincr Whitney love 1>><</link>><<promiscuous1>><<glove>>
             <br>
-            <<link [[顺其自然|Whitney Extra Mod Park Snowball 3]]>><<set $phase to 1>><<stress 6>><<trauma 6>><<npcincr Whitney dom 1>><</link>><<gstress>><<gtrauma>><<gdom>>
+            <<link [[顺其自然|WhitExtMod Park Snowball 3]]>><<set $phase to 1>><<stress 6>><<trauma 6>><<npcincr Whitney dom 1>><</link>><<gstress>><<gtrauma>><<gdom>>
             <br>
-            <<link [["推开" + $NPCList[0].pronouns.him|Whitney Extra Mod Park Snowball 3]]>><<set $phase to 2>><<npcincr Whitney dom -1>><</link>><<ldom>>
+            <<link [["推开" + $NPCList[0].pronouns.him|WhitExtMod Park Snowball 3]]>><<set $phase to 2>><<npcincr Whitney dom -1>><</link>><<ldom>>
 
         <<else>> /* 非恋人关係 */
             <<he>>的一隻手抓住了你，另一隻手迅速地<<if $worn.under_lower.type.includes("naked")>>摸向你的下体<<else>>鑽进了你的$worn.lower.cn_name_cap裡<</if>>，你突然感觉到寒冷刺痛着你的<<genitals>>，惠特尼把一大坨雪<<if $worn.under_lower.type.includes("naked")>>抹在了你的胯下<<else>>放进了你的$worn.under_lower.cn_name_cap裡<</if>>！<<pain 4>><<gpain>>
@@ -187,7 +187,7 @@
         <</if>>
     <</if>>
 
-:: Whitney Extra Mod Park Snowball 3
+:: WhitExtMod Park Snowball 3
     <<effects>>
 
     <<if $phase is 0>> /* 磨蹭TA */
@@ -215,7 +215,7 @@
             “这样就射了？你真是个骚货，”<<he>>笑着说，移动了身体，坐到你的脸上，扯下了裤子，“不能只有你自己爽了，来吧。”
             <br><br>
 
-            <<link [[继续|Whitney Extra Mod Park Snowball Sex]]>><<set $sexstart to 1>><</link>>
+            <<link [[继续|WhitExtMod Park Snowball Sex]]>><<set $sexstart to 1>><</link>>
 
         <<else>>
             没过多久，<<he>>停了下来，而<<if $player.penisExist>>你在衣服下的阴茎已经硬了<<else>>你与<<he>>下体摩擦的布料已经变得湿润了<</if>>，<<he>>呼出了一口气，离开了你身上，站了起来。正当你准备跟着起身时，<<he>>突然用脚踩在你的裆部上，阻止你站起来。<<npcincr Whitney lust 10>><<gglust>>
@@ -236,7 +236,7 @@
             “这样就射了？你真是个骚货，”<<he>>笑着说道，移动了身体，坐到你的脸上，扯开了<<he>>的<<npcClothesText $NPCList[0] "lower">>，“不能只有你自己爽了，来吧。”
             <br><br>
 
-            <<link [[继续|Whitney Extra Mod Park Snowball Sex]]>><<set $molestationstart to 1>><</link>>
+            <<link [[继续|WhitExtMod Park Snowball Sex]]>><<set $molestationstart to 1>><</link>>
 
         <<else>>
             还好<<he>>没有持续很久就停了下来，“你挺乖的，这次就放过你。”<<he>>满意地拍了拍你的头，然后离开你身上。
@@ -259,7 +259,7 @@
 
     <</if>>
 
-:: Whitney Extra Mod Park Snowball Sex
+:: WhitExtMod Park Snowball Sex
     <<if $molestationstart is 1>>
         <<set $molestationstart to 0>>
         <<controlloss>>
@@ -287,12 +287,12 @@
     <<actionsman>>
 
     <<if _combatend>>
-        <span id="next"><<link [[继续|Whitney Extra Mod Park Snowball Sex Finish]]>><</link>></span><<nexttext>>
+        <span id="next"><<link [[继续|WhitExtMod Park Snowball Sex Finish]]>><</link>></span><<nexttext>>
     <<else>>
-        <span id="next"><<link [[继续|Whitney Extra Mod Park Snowball Sex]]>><</link>></span><<nexttext>>
+        <span id="next"><<link [[继续|WhitExtMod Park Snowball Sex]]>><</link>></span><<nexttext>>
     <</if>>
 
-:: Whitney Extra Mod Park Snowball Sex Finish
+:: WhitExtMod Park Snowball Sex Finish
 	<<effects>>
 
 	<<if $enemyarousal gte $enemyarousalmax>>

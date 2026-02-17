@@ -1,4 +1,4 @@
-:: Whitney Extra Mod Test
+:: WhitExtMod Test
 <<set _Wp to `Whitney Extra Mod Test`>>
 
 非／戀人關係：<span class="glod"><<= $whitneyromance is 1 ? `戀人` : `非戀`>></span>

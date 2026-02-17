@@ -1,4 +1,4 @@
-:: Whitney Extra Mod Widgets [widget]
+:: WhitExtMod Widgets [widget]
 /* 初始化 */
 <<widget "whitExtMod_init">>
 
@@ -73,11 +73,11 @@
 		/* Tip <<nnpc_He "Whitney">>似乎不欢迎你，如果你更暴露一点或许<<nnpc_He "Whitney">>会感性趣 */
 		<<if $exhibitionism gte 75 or $exposed lte 1>>
 			<<if $daily.whitney.whitExtMod_lake gte 1>>
-				<<askicon>><<link [[靠近|Whitney Extra Mod Lake Leave]]>><</link>>
+				<<askicon>><<link [[靠近|WhitExtMod Lake Leave]]>><</link>>
 			<<elseif $exposed is 2>>
-				<<whitExtMod_lakeduckicon>><<link [[靠近|Whitney Extra Mod Lake]]>><<set $phase to 0>><</link>><<exhibitionist5>>
+				<<whitExtMod_lakeduckicon>><<link [[靠近|WhitExtMod Lake]]>><<set $phase to 0>><</link>><<exhibitionist5>>
 			<<else>>
-				<<whitExtMod_lakeduckicon>><<link [[靠近|Whitney Extra Mod Lake]]>><<set $phase to 1>><</link>>
+				<<whitExtMod_lakeduckicon>><<link [[靠近|WhitExtMod Lake]]>><<set $phase to 1>><</link>>
 			<</if>>
 		<<else>>
 			<span class="blue">你现在光着身子，不敢靠近<<nnpc_He "Whitney">>。</span>
@@ -96,7 +96,7 @@
 <<widget "whitExtMod_parkChocolate">>
     <<if isInPark("whitney") and $whitneyromance is 1 and $daily.whitney.whitExtMod_parkChocolate is undefined and $whitExtMod.parkChocolateDisable is "f">>
         <br>
-		<<foodicon "cocoa">><<link [[给惠特尼买热巧克力 (£2 0:20)|Whitney Extra Mod Park Robin Chocolate]]>><<set $money -= 200>><<pass 20>><<set $daily.whitney.whitExtMod_parkChocolate to 1>><</link>>
+		<<foodicon "cocoa">><<link [[给惠特尼买热巧克力 (£2 0:20)|WhitExtMod Park Robin Chocolate]]>><<set $money -= 200>><<pass 20>><<set $daily.whitney.whitExtMod_parkChocolate to 1>><</link>>
 	<</if>>
 <</widget>>
 
@@ -107,16 +107,16 @@
 
     你突然被一个湿湿的雪球砸了。你转身看去，是惠特尼，<<he>>快速地擦着手上的雪。<<if isLoveInterest("Whitney")>><<stress -3>><<lstress>><<else>><<stress 12>><<ggstress>><</if>>
     <br><br>
-    <<link [[丢雪球|Whitney Extra Mod Park Snowball]]>><<set $phase to 1>><</link>><<skill_difficulty `currentSkillValue("handskill")` "手部技巧" 1 800>>
+    <<link [[丢雪球|WhitExtMod Park Snowball]]>><<set $phase to 1>><</link>><<skill_difficulty `currentSkillValue("handskill")` "手部技巧" 1 800>>
     <br>
-    <<link [[无视|Whitney Extra Mod Park Snowball]]>><<set $phase to 0>><</link>>
+    <<link [[无视|WhitExtMod Park Snowball]]>><<set $phase to 0>><</link>>
 <</widget>>
 
 /* ---------------------- 學校 - 天台 - 滑翔 ---------------------- */
 <<widget "whitExtMod_schoolRoofGlide">>
 	<<if $whitExtMod.schoolRoofGlideDisable is "f" and ($daily.whitExtMod_schoolRoofGlide isnot true or (Time.hour lt 7 and Time.hour gt 16)) and ($harpy gte 6 or $angel gte 6 or $demon gte 6 or $fallenangel gte 2)>>
 		<br>
-    	<<glideicon>><<link [[向下滑翔|Whitney Extra Mod School Roof Glide]]>><</link>><<flight_text>>
+    	<<glideicon>><<link [[向下滑翔|WhitExtMod School Roof Glide]]>><</link>><<flight_text>>
 	<<elseif $daily.whitExtMod_schoolRoofGlide is true>>
 		<span class="blue">你看到門衛時不時地往天台張望。避免引起注意，你今天最好不要再從天台跳下去了。</span>
 	<</if>>
