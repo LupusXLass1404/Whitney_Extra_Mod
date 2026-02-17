@@ -1,0 +1,78 @@
+{
+  "name": "Whitney_Extra_Mod",
+  "version": "1.1.3",
+  "styleFileList": [],
+  "scriptFileList": [
+    "game/03-JavaScript/whitney_extra_mod_fn.js"
+  ],
+  "tweeFileList": [
+    "game/whitney_extra_mod_lake.twee",
+    "game/whitney_extra_mod_park.twee"
+  ],
+  "imgFileList": [
+    "img/misc/icon/whitExtMod_lakeduck.png",
+    "img/misc/icon/whitExtMod_duck.png",
+    "img/misc/icon/whitExtMod_toast.png"
+  ],
+  "additionFile": [
+    "README.md"
+  ],
+  "addonPlugin": [
+    {
+      "modName": "ModLoader DoL ImageLoaderHook",
+      "addonName": "ImageLoaderAddon",
+      "modVersion": "^2.3.0",
+      "params": []
+    },
+    {
+      "modName": "ReplacePatcher",
+      "addonName": "ReplacePatcherAddon",
+      "modVersion": "0.0.1",
+      "params": {
+        "js": [
+          {
+            "from": "text: V.whitney_text,",
+            "to": "text: V.whitney_text,\n\t\t\t\twhitExtMod_lake: V.whitextmod_lake,\n\t\t\t\twhitExtMod_duck: V.whitextmod_duck,\n\t\t\t\twhitExtMod_clothes: V.whitextmod_clothes,\n\t\t\t\twhitExtMod_feed: V.whitExtMod_feed,\n\t\t\t\twhitExtMod_exposed: V.whitExtMod_exposed,\n\t\t\t\twhitExtMod_leaveDirectly: V.whitExtMod_leaveDirectly,\n\t\t\t\twhitExtMod_parkSnowball: V.whitExtMod_parkSnowball,\n\t\t\t\twhitExtMod_parkChocolate: V.whitExtMod_parkChocolate,",
+            "fileName": "ingame.js"
+          }
+        ]
+      }
+    },
+    {
+      "modName": "TweeReplacer",
+      "addonName": "TweeReplacerAddon",
+      "modVersion": "1.0.0",
+      "params": [
+        {
+          "passage": "Lake Shore",
+          "findString": "<<if Time.hour gte 18 and $halloween is 1 and Time.monthDay is 31 and $halloween_lake is 1>>",
+          "replace": "<<whitExtMod_lake>>\n\n\t\t<<if Time.hour gte 18 and $halloween is 1 and Time.monthDay is 31 and $halloween_lake is 1>>"
+        },
+        {
+          "passage": "Park",
+          "findString": "<<elseif (dangerEvent() or $eventforced) and $eventskip is 0>>",
+          "replace": "<<elseif whitExtMod_parkSnowball()>><<whitExtMod_parkSnowball>>\n\t<<elseif (dangerEvent() or $eventforced) and $eventskip is 0>>"
+        },
+        {
+          "passage": "Robin Chocolate Widgets",
+          "findString": "|Robin Chocolate Help]]>><<endevent>><<npcincr Robin love 1>><<npcincr Robin trauma -1>><<pass 30>><<clotheson>><</link>><<glove>><<lrtrauma>>",
+          "replace": "|Robin Chocolate Help]]>><<endevent>><<npcincr Robin love 1>><<npcincr Robin trauma -1>><<pass 30>><<clotheson>><</link>><<glove>><<lrtrauma>>\n\t\t<<whitExtMod_parkChocolate>>"
+        }
+      ]
+    }
+  ],
+  "dependenceInfo": [
+    {
+      "modName": "TweeReplacer",
+      "version": "^1.0.0"
+    },
+    {
+      "modName": "ReplacePatcher",
+      "version": "^1.0.0"
+    },
+    {
+      "modName": "ModLoader DoL ImageLoaderHook",
+      "version": "^2.3.0"
+    }
+  ]
+}
